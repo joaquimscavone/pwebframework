@@ -3,7 +3,9 @@
 
 namespace Core;
 
-
+/**
+ * Summary of Router
+ */
 class Router
 {
     private static $routers = [];
@@ -100,7 +102,6 @@ class Router
     public static function getRouterByUrl($url)
     {
         foreach (self::$routers as $router_url => $router) {
-            echo $url . " == " . $router_url.'<hr>';
             $expression = preg_replace("(\{[a-z0-9_]{1,}\})", "([a-zA-Z0-9_\-|\s]{1,})", $router_url);
             if(preg_match('#^('.$expression.')*$#i',$url,$matches)===1){
                 array_shift($matches);
