@@ -106,7 +106,7 @@ class Router
                 array_shift($matches);
                 array_shift($matches);
                 foreach($router->parameters as &$param){
-                    $param = array_shift($matches);
+                    $param = urldecode(array_shift($matches));
                 }
                 return $router;
             }
