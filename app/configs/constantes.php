@@ -9,6 +9,7 @@ defined('TEMPLATES_PATH')           || define('TEMPLATES_PATH', APP_PATH . '/tem
 defined('VIEWS_PATH')               || define('VIEWS_PATH', APP_PATH . '/views');
 defined('CONTROLLERS_PATH')         || define('CONTROLLERS_PATH', APP_PATH . '/controllers');
 defined('MODELS_PATH')              || define('MODELS_PATH', APP_PATH . '/models');
+defined('CONFIGS_PATH')             || define('CONFIGS_PATH', APP_PATH . '/configs');
 
 
 
