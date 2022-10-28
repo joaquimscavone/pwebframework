@@ -1,9 +1,11 @@
 <?php
 
 namespace Controllers;
+use Core\View;
 class Home{
     public function index(){
-        echo 'Meu primeiro controller';
+        $view = new View('home');
+        $view->show();
     }
 
     public function user($nome){

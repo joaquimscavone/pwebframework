@@ -9,3 +9,9 @@ defined('TEMPLATES_PATH')           || define('TEMPLATES_PATH', APP_PATH . '/tem
 defined('VIEWS_PATH')               || define('VIEWS_PATH', APP_PATH . '/views');
 defined('CONTROLLERS_PATH')         || define('CONTROLLERS_PATH', APP_PATH . '/controllers');
 defined('MODELS_PATH')              || define('MODELS_PATH', APP_PATH . '/models');
+
+
+
+//constantes do framework
+
+defined('TEMPLATE_DEFAULT')         || define('TEMPLATE_DEFAULT', 'sistema.php');
