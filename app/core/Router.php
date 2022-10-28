@@ -3,6 +3,8 @@
 
 namespace Core;
 
+use Exception;
+
 /**
  * Summary of Router
  */
@@ -48,6 +50,17 @@ class Router
 
     public static function add($url, $controller, $method)
     {
+        if(substr($url,0,1)==='/'){
+            $url = substr_replace($url, '', 0, 1);
+        }
+        if(!file_exists(APP_PATH . "/".str_replace("\\","/",$controller).".php")){
+            throw new Exception("Erro ao Adicionar a Rota, o Controller: \"$controller\" não existe ERRO  Arquivo:".__FILE__." Linha:".__LINE__);
+        }
+
+        if(!method_exists($controller,$method)){
+            throw new Exception("Erro ao Adicionar a Rota, o Método: \"$method\" não existe no Controller: \"$controller\" ERRO Arquivo:".__FILE__." Linha:".__LINE__);
+        }
+
         self::$routers[$url] = new Router($url, $controller, $method);
     }
 
