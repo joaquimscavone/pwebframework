@@ -17,3 +17,4 @@ defined('CONFIGS_PATH')             || define('CONFIGS_PATH', APP_PATH . '/Confi
 
 defined('TEMPLATE_DEFAULT')         || define('TEMPLATE_DEFAULT', 'sistema.php');
 defined('CONNECTION_NAME_DEFAULT')  || define('CONNECTION_NAME_DEFAULT', 'default');
+defined('APPLICATION_ENV')          || define('APPLICATION_ENV', 'development'); //production utilizado pelo usuário final e development em fase de desenvolvimento

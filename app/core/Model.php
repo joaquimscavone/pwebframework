@@ -11,11 +11,12 @@ use IntlException;
 abstract class Model{
 
     protected $connection_name = CONNECTION_NAME_DEFAULT;
+    protected $driver;
     public function __construct()
     {
         //$this->connection_name = 'administrativo';
         $parameters = $this->loadParameters();
-        Connection::getConncetion($parameters);
+        $driver = new Database\Mysql($parameters);
         //var_dump($parameters);
     }
     /**
