@@ -16,3 +16,4 @@ defined('CONFIGS_PATH')             || define('CONFIGS_PATH', APP_PATH . '/Confi
 //constantes do framework
 
 defined('TEMPLATE_DEFAULT')         || define('TEMPLATE_DEFAULT', 'sistema.php');
+defined('CONNECTION_NAME_DEFAULT')  || define('CONNECTION_NAME_DEFAULT', 'default');

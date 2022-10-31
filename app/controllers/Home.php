@@ -4,13 +4,10 @@ namespace Controllers;
 
 use Core\Configs;
 use Core\View;
+use Models\Usuairos;
 class Home{
     public function index(){
-        //$view = new View('home');
-        //$view->show();
-        echo '<pre>';
-        var_dump(Configs::getConfig('databases'));
-        var_dump(Configs::getConfig('databases'));
+        $usuarios = new Usuairos();
     }
 
     public function user($nome){
