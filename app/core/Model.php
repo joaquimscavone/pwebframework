@@ -3,6 +3,7 @@
 
 namespace Core;
 
+use \Core\DataBase\Connection;
 use Exception;
 use IntlException;
 
@@ -12,8 +13,10 @@ abstract class Model{
     protected $connection_name = CONNECTION_NAME_DEFAULT;
     public function __construct()
     {
+        //$this->connection_name = 'administrativo';
         $parameters = $this->loadParameters();
-        var_dump($parameters);
+        Connection::getConncetion($parameters);
+        //var_dump($parameters);
     }
     /**
      * carrega as informações do arquivo CONFIGS_PATH/databases.php

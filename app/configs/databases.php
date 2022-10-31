@@ -5,15 +5,16 @@ return
     'default' => 
     [
         'driver'        =>      'mysql',
-        'url'           =>      'localhost',
+        'host'           =>      'localhost',
         'database'      =>      'framework',
         'user'          =>      'root',
-        'password'      =>      ''
+        'password'      =>      '',
+        'port'          => 3306
     ],
     'administrativo' => 
     [
         'driver'        =>      'mysql',
-        'url'           =>      'localhost',
+        'host'           =>      'localhost',
         'database'      =>      'adm',
         'user'          =>      'root',
         'password'      =>      ''
@@ -21,7 +22,7 @@ return
     'logs' => 
     [
         'driver'        =>      'mongodb',
-        'url'           =>      'localhost',
+        'host'           =>      'localhost',
         'database'      =>      'logs',
         'user'          =>      'root',
         'password'      =>      ''
