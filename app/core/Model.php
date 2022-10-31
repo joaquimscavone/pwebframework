@@ -12,12 +12,21 @@ abstract class Model{
 
     protected $connection_name = CONNECTION_NAME_DEFAULT;
     protected $driver;
+
+    protected $table;
+
+    protected $pk;
+
+    protected $columns = [];
+
+    protected $data = [];
+
+    public $___exists___ = false;
     public function __construct()
     {
         //$this->connection_name = 'administrativo';
         $parameters = $this->loadParameters();
-        $driver = new Database\Mysql($parameters);
-        //var_dump($parameters);
+        $this->driver = new $parameters['class']($parameters);
     }
     /**
      * carrega as informações do arquivo CONFIGS_PATH/databases.php
@@ -38,9 +47,35 @@ abstract class Model{
 
         
     }
+    //$usuarios->nome
+    public function __get($name)
+    {
+        if(array_key_exists($name,$this->data)){
+            return $this->data[$name];
+        }
+        return null;
+    }
+
+    public function __set($name, $value)
+    {
+        $this->data[$name] = $value;
+    }
 
     //inserir
-    public function insert($data = null){
+    private function insert($data){
+        return true;
+    }
+
+    private function update($data){
+        return true;
+    }
+
+    public function save($data = []){
+        $data = array_merge($this->data, $data);
+        if($this->___exists___){
+            return $this->update($data);
+        }
+        return $this->insert($data);
 
     }
 

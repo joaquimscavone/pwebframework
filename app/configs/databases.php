@@ -4,12 +4,11 @@ return
 [
     'default' => 
     [
-        'driver'        =>      'mysql',
-        'host'           =>      'localhost',
+        'class'         =>      '\Core\DataBase\Mysql',
         'database'      =>      'framework',
         'user'          =>      'root',
         'password'      =>      '',
-        'port'          => 3306
+        
     ],
     'administrativo' => 
     [

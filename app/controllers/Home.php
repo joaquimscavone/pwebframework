@@ -8,6 +8,8 @@ use Models\Usuairos;
 class Home{
     public function index(){
         $usuarios = new Usuairos();
+        $usuarios->nome = 'Joaquim';
+        var_dump($usuarios->nome);
     }
 
     public function user($nome){
