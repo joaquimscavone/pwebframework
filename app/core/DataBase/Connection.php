@@ -24,7 +24,8 @@ class Connection{
             }catch(PDOException $e){
                 throw new \Exception("Não foi possível se connectar a base de dados verifique suas credenciais");
             }
-            
+            self::$conncetions[$key] = $conn;
         }
+        return self::$conncetions[$key];
     }
 }

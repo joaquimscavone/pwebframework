@@ -63,7 +63,7 @@ abstract class Model{
 
     //inserir
     private function insert($data){
-        return true;
+        return $this->driver->insert($this->table, $data);
     }
 
     private function update($data){
