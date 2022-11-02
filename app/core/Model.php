@@ -63,7 +63,11 @@ abstract class Model{
 
     //inserir
     private function insert($data){
-        return $this->driver->insert($this->table, $data);
+        $id = $this->driver->insert($this->table, $data);
+        $pk = $this->pk;
+        $this->$pk = $id;
+        $this->storage();
+        return true;
     }
 
     private function update($data){
@@ -77,6 +81,10 @@ abstract class Model{
         }
         return $this->insert($data);
 
+    }
+
+    private function storage(){
+        $this->___exists___ = true;
     }
 
 }

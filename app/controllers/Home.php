@@ -7,10 +7,17 @@ use Core\View;
 use Models\Usuairos;
 class Home{
     public function index(){
+        $this->insert('André', 'andre@gmail.com', 'Vacalouca');
+    }
+
+
+    private function insert($nome,$email,$senha){
         $usuarios = new Usuairos();
-        $usuarios->nome = 'Pedro';
-        $usuarios->email = 'pedro@mail.com';
-        $usuarios->save(['senha' => md5('123456')]);
+        $usuarios->nome = $nome;
+        $usuarios->email = $email;
+        $usuarios->save(['senha' => md5($senha)]);
+        echo '<pre>';
+        var_dump($usuarios);
     }
 
     public function user($nome){
