@@ -38,10 +38,28 @@ abstract class DataBaseDriver{
         return $this->getConnection()->lastInsertId($table);
     }
 
-    public function select(string $table, array $columns){
+    protected function prepareWhere(array $where){
+        $sql = "";
+        $data = [];
+        foreach($where as $key => $cond){
+            $sql.= ($key) ? " {$cond['logic']} " : " WHERE ";
+            $sql .= "{$cond['column']} {$cond['comparation']} :where_cond_value_$key";
+            $data[":where_cond_value_$key"] = $cond['value'];
+        }
+        return [$sql, $data];
+
+    }
+
+    public function select(string $table, array $columns, array $where = []){
         $columns = implode(',',$columns);
         $sql = "SELECT $columns FROM $table";
-        return $this->query($sql);
+        $data = [];
+        if(count($where)){
+            [$wsql, $wdata] = $this->prepareWhere($where);
+            $sql .= $wsql;
+            $data = array_merge($data,$wdata);
+        }
+        return $this->query("$sql;",$data);
     }
 
 }

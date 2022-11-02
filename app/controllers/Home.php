@@ -9,8 +9,10 @@ class Home{
     public function index(){
         $usuarios = new Usuairos();
         echo '<pre>';
-        $todos = $usuarios->all();
-        echo $todos[0]->nome;
+        $todos = $usuarios->where('nome','like','%o%')->where('email','like','%@mail.com')->all();
+        foreach($todos as $user){
+            echo $user->nome . " - " . $user->email . "<hr>";
+        }
     }
 
 

@@ -95,7 +95,7 @@ abstract class Model{
 
     //todos os registros da base dados
     public function all(){
-        $stm = $this->getDriver()->select($this->table, $this->columns);
+        $stm = $this->getDriver()->select($this->table, $this->columns, $this->where);
         $result = $stm->fetchAll(\PDO::FETCH_CLASS, $this::class);
         array_walk($result,function(&$tupla){
             $tupla->storage();
