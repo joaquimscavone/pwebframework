@@ -8,7 +8,7 @@ abstract class DataBaseDriver{
 
     protected $conneciton;
     
-    public function __construct($parameters)
+    public function __construct(array $parameters)
     {
         $this->conneciton = Connection::getConncetion(
                 array_merge($this->connection_parameters_default, $parameters)
@@ -19,7 +19,7 @@ abstract class DataBaseDriver{
         return $this->conneciton;
     }
 
-    public function insert($table,$data){
+    public function insert(string $table, array $data){
          $columns = implode(', ',array_keys($data));
          $values = ":".implode(', :',array_keys($data));
          $sql = "INSERT INTO $table ($columns) values ($values);";
@@ -27,14 +27,21 @@ abstract class DataBaseDriver{
          return $this->lastInsertId($table);
     }
 
-    public function query($sql,$data){
+    public function query(string $sql,array $data = []){
         $stm = $this->getConnection()->prepare($sql);
         $stm->execute($data);
         return $stm;
 
     }
 
-    public function lastInsertId($table){
+    public function lastInsertId(string $table){
         return $this->getConnection()->lastInsertId($table);
     }
+
+    public function select(string $table, array $columns){
+        $columns = implode(',',$columns);
+        $sql = "SELECT $columns FROM $table";
+        return $this->query($sql);
+    }
+
 }

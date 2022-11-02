@@ -7,7 +7,10 @@ use Core\View;
 use Models\Usuairos;
 class Home{
     public function index(){
-        $this->insert('André', 'andre@gmail.com', 'Vacalouca');
+        $usuarios = new Usuairos();
+        echo '<pre>';
+        $todos = $usuarios->all();
+        echo $todos[0]->nome;
     }
 
 

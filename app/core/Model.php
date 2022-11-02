@@ -4,6 +4,7 @@
 namespace Core;
 
 use \Core\DataBase\Connection;
+use Core\DataBase\DataBaseDriver;
 use Exception;
 use IntlException;
 
@@ -21,7 +22,7 @@ abstract class Model{
 
     protected $data = [];
 
-    public $___exists___ = false;
+    protected $___exists___ = false;
     public function __construct()
     {
         //$this->connection_name = 'administrativo';
@@ -45,8 +46,11 @@ abstract class Model{
 
         return $databases[$this->connection_name];
 
-        
     }
+    protected function getDriver():DataBaseDriver{
+        return $this->driver;
+    }
+
     //$usuarios->nome
     public function __get($name)
     {
@@ -83,7 +87,17 @@ abstract class Model{
 
     }
 
-    private function storage(){
+    //todos os registros da base dados
+    public function all(){
+        $stm = $this->getDriver()->select($this->table, $this->columns);
+        $result = $stm->fetchAll(\PDO::FETCH_CLASS, $this::class);
+        array_walk($result,function(&$tupla){
+            $tupla->storage();
+        });
+        return $result;
+    }
+
+    protected function storage(){
         $this->___exists___ = true;
     }
 
