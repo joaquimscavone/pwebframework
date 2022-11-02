@@ -23,6 +23,12 @@ abstract class Model{
     protected $data = [];
 
     protected $___exists___ = false;
+
+    protected $where = [];
+
+    protected $comparasion_operators = [
+        '=','<>',">",'<','>=','<=','like'
+    ];
     public function __construct()
     {
         //$this->connection_name = 'administrativo';
@@ -100,5 +106,32 @@ abstract class Model{
     protected function storage(){
         $this->___exists___ = true;
     }
+
+
+    // trabalhando where
+    protected function addWhere($column,$comparasion_operator,$value,$logic_operator = 'AND'){
+        if(!in_array($column,$this->columns)){
+            throw new Exception("$column não existe no array columns da class ".$this::class);
+        }
+        if(!in_array($comparasion_operator,$this->comparasion_operators)){
+            throw new Exception("$comparasion_operator não existe na lista de Operadores aceitos na class ".Model::class);
+        }
+        $this->where[] = [
+                        'column'=>$column,
+                        'comparation'=>$comparasion_operator,
+                        'value'=>$value,
+                        'logic'=>$logic_operator
+                        ];
+        return $this;
+    }
+
+    public function where($column,$comparasion_operator,$value){
+        return $this->addWhere($column, $comparasion_operator, $value);
+    }
+    public function orWhere($column,$comparasion_operator,$value){
+        return $this->addWhere($column, $comparasion_operator, $value,'OR');
+    }
+
+  
 
 }
