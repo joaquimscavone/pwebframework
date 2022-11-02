@@ -50,7 +50,19 @@ abstract class DataBaseDriver{
 
     }
 
-    public function select(string $table, array $columns, array $where = []){
+    private function prepareOrder(array $order){
+        //ORDER BY nome DESC, email ASC
+
+        $sql = " ORDER BY";
+        $comma = " ";
+        foreach($order as $exp){
+            $sql .= $comma . implode(" ", $exp);
+            $comma = ", ";
+        }
+        return $sql;
+    }
+
+    public function select(string $table, array $columns, array $where = [], array $order=[]){
         $columns = implode(',',$columns);
         $sql = "SELECT $columns FROM $table";
         $data = [];
@@ -58,6 +70,9 @@ abstract class DataBaseDriver{
             [$wsql, $wdata] = $this->prepareWhere($where);
             $sql .= $wsql;
             $data = array_merge($data,$wdata);
+        }
+        if(count($order)){
+           $sql.= $this->prepareOrder($order);
         }
         return $this->query("$sql;",$data);
     }

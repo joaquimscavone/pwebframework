@@ -25,6 +25,7 @@ abstract class Model{
     protected $___exists___ = false;
 
     protected $where = [];
+    protected $order = [];
 
     protected $comparasion_operators = [
         '=','<>',">",'<','>=','<=','like'
@@ -95,7 +96,7 @@ abstract class Model{
 
     //todos os registros da base dados
     public function all(){
-        $stm = $this->getDriver()->select($this->table, $this->columns, $this->where);
+        $stm = $this->getDriver()->select($this->table, $this->columns, $this->where, $this->order);
         $result = $stm->fetchAll(\PDO::FETCH_CLASS, $this::class);
         array_walk($result,function(&$tupla){
             $tupla->storage();
@@ -111,7 +112,7 @@ abstract class Model{
     // trabalhando where
     protected function addWhere($column,$comparasion_operator,$value,$logic_operator = 'AND'){
         if(!in_array($column,$this->columns)){
-            throw new Exception("$column não existe no array columns da class ".$this::class);
+            throw new Exception("Impossível criar o where, $column não existe no array columns da class ".$this::class);
         }
         if(!in_array($comparasion_operator,$this->comparasion_operators)){
             throw new Exception("$comparasion_operator não existe na lista de Operadores aceitos na class ".Model::class);
@@ -130,6 +131,25 @@ abstract class Model{
     }
     public function orWhere($column,$comparasion_operator,$value){
         return $this->addWhere($column, $comparasion_operator, $value,'OR');
+    }
+
+    protected function addOrder($column, $order = 'ASC'){
+        if(!in_array($column,$this->columns)){
+            throw new Exception("Impossível criar o Order, $column não existe no array columns da class ".$this::class);
+        }
+       
+        $this->order[] = [
+                        'column'=>$column,
+                        'order' => $order
+                        ];
+        return $this;
+    }
+
+    public function orderAsc($column){
+        return $this->addOrder($column);
+    }
+    public function orderDesc($column){
+        return $this->addOrder($column,'DESC');
     }
 
   
