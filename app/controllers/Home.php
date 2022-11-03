@@ -7,9 +7,8 @@ use Core\View;
 use Models\Usuairos;
 class Home{
     public function index(){
-        $user = new Usuairos(1);
-        $user->senha = md5('abc123');
-        $user->save();
+        $user = new Usuairos(6);
+        $user->delete();
         echo $user->nome . " - " . $user->email . "<hr>";
     }
 

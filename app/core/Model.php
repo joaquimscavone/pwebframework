@@ -83,12 +83,24 @@ abstract class Model{
         $pk = $this->pk;
         $this->$pk = $id;
         $this->storage();
-        return true;
+        return $this;
     }
 
     private function update($data){
-        echo 'Update';
-        return true;
+        $pk = $this->pk;
+        $this->where($this->pk, '=', $this->$pk);
+        $result = $this->getDriver()->update($this->table, $data, $this->flushWhere());
+        if($result){
+            $this->data = $data;
+        }
+        return $this;
+    }
+    public function delete(){
+        $pk = $this->pk;
+        $this->where($this->pk, '=', $this->$pk);
+        $result = $this->getDriver()->delete($this->table, $this->flushWhere());
+        $this->storage(false);
+        return $this;
     }
 
     public function save($data = []){
@@ -137,8 +149,8 @@ abstract class Model{
         return $result;
     }
 
-    protected function storage(){
-        $this->___exists___ = true;
+    protected function storage($status = true){
+        $this->___exists___ = $status;
     }
 
 
