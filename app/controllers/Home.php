@@ -9,7 +9,7 @@ class Home{
     public function index(){
         $usuarios = new Usuairos();
         echo '<pre>';
-        $todos = $usuarios->orderDesc('nome')->where('email','like','%@mail.com')->all();
+        $todos = $usuarios->orderDesc('nome')->where('email','like','%@mail.com')->limit(5,2)->all();
         foreach($todos as $user){
             echo $user->nome . " - " . $user->email . "<hr>";
         }

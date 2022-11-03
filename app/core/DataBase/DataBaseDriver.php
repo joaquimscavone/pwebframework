@@ -62,7 +62,11 @@ abstract class DataBaseDriver{
         return $sql;
     }
 
-    public function select(string $table, array $columns, array $where = [], array $order=[]){
+    protected function prepareLimit(array $limit){
+        return " LIMIT " . implode(',', $limit);
+    }
+
+    public function select(string $table, array $columns, array $where = [], array $order=[], array $limit = null){
         $columns = implode(',',$columns);
         $sql = "SELECT $columns FROM $table";
         $data = [];
@@ -73,6 +77,9 @@ abstract class DataBaseDriver{
         }
         if(count($order)){
            $sql.= $this->prepareOrder($order);
+        }
+        if($limit){
+            $sql .= $this->prepareLimit($limit);
         }
         return $this->query("$sql;",$data);
     }

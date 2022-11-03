@@ -27,6 +27,8 @@ abstract class Model{
     protected $where = [];
     protected $order = [];
 
+    protected $limit;
+
     protected $comparasion_operators = [
         '=','<>',">",'<','>=','<=','like'
     ];
@@ -96,7 +98,11 @@ abstract class Model{
 
     //todos os registros da base dados
     public function all(){
-        $stm = $this->getDriver()->select($this->table, $this->columns, $this->where, $this->order);
+        $stm = $this->getDriver()->select($this->table, 
+                                         $this->columns, 
+                                         $this->flushWhere(), 
+                                         $this->flushOrder(), 
+                                         $this->flushLimit());
         $result = $stm->fetchAll(\PDO::FETCH_CLASS, $this::class);
         array_walk($result,function(&$tupla){
             $tupla->storage();
@@ -126,6 +132,12 @@ abstract class Model{
         return $this;
     }
 
+    protected function flushWhere(){
+        $where = $this->where;
+        $this->where = [];
+        return $where;
+    }
+
     public function where($column,$comparasion_operator,$value){
         return $this->addWhere($column, $comparasion_operator, $value);
     }
@@ -144,14 +156,26 @@ abstract class Model{
                         ];
         return $this;
     }
-
+    protected function flushOrder(){
+        $order = $this->order;
+        $this->order = [];
+        return $order;
+    }
     public function orderAsc($column){
         return $this->addOrder($column);
     }
     public function orderDesc($column){
         return $this->addOrder($column,'DESC');
     }
-
-  
+    protected function flushLimit(){
+        $limit = $this->limit;
+        unset($this->limit);
+        return $limit;
+    }
+    public function limit(int $limit, int $offset = null){
+        (is_null($offset)) || $this->limit['offset'] = $offset;
+        $this->limit['limit'] = $limit;
+        return $this;
+    }
 
 }
