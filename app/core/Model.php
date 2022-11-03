@@ -32,11 +32,14 @@ abstract class Model{
     protected $comparasion_operators = [
         '=','<>',">",'<','>=','<=','like'
     ];
-    public function __construct()
+    public function __construct($id = null)
     {
         //$this->connection_name = 'administrativo';
         $parameters = $this->loadParameters();
         $this->driver = new $parameters['class']($parameters);
+        if($id){
+            $this->load($id);
+        }
     }
     /**
      * carrega as informações do arquivo CONFIGS_PATH/databases.php
@@ -84,6 +87,7 @@ abstract class Model{
     }
 
     private function update($data){
+        echo 'Update';
         return true;
     }
 
@@ -94,6 +98,18 @@ abstract class Model{
         }
         return $this->insert($data);
 
+    }
+    private function load($id){
+        $this->where($this->pk, '=', $id);
+        $stm = $this->getDriver()->select($this->table, 
+                                         $this->columns, 
+                                         $this->flushWhere());
+        $result = $stm->fetch(\PDO::FETCH_ASSOC);
+        if($result){
+            $this->data = $result;
+            $this->storage();
+        }
+        return $this;
     }
 
     //todos os registros da base dados
@@ -107,6 +123,17 @@ abstract class Model{
         array_walk($result,function(&$tupla){
             $tupla->storage();
         });
+        return $result;
+    }
+    public function get(){
+        $stm = $this->getDriver()->select($this->table, 
+                                         $this->columns, 
+                                         $this->flushWhere(), 
+                                         $this->flushOrder());
+        $result = $stm->fetchObject($this::class);
+        if($result){
+            $result->storage();
+        }
         return $result;
     }
 

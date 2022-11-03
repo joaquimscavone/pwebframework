@@ -7,12 +7,10 @@ use Core\View;
 use Models\Usuairos;
 class Home{
     public function index(){
-        $usuarios = new Usuairos();
-        echo '<pre>';
-        $todos = $usuarios->orderDesc('nome')->where('email','like','%@mail.com')->limit(5,2)->all();
-        foreach($todos as $user){
-            echo $user->nome . " - " . $user->email . "<hr>";
-        }
+        $user = new Usuairos(1);
+        $user->senha = md5('abc123');
+        $user->save();
+        echo $user->nome . " - " . $user->email . "<hr>";
     }
 
 
