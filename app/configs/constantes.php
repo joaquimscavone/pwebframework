@@ -15,6 +15,7 @@ defined('CONFIGS_PATH')             || define('CONFIGS_PATH', APP_PATH . '/Confi
 
 //constantes do framework
 
-defined('TEMPLATE_DEFAULT')         || define('TEMPLATE_DEFAULT', 'sistema.php');
+defined('TEMPLATE_DEFAULT')         || define('TEMPLATE_DEFAULT', 'main.template.php');
 defined('CONNECTION_NAME_DEFAULT')  || define('CONNECTION_NAME_DEFAULT', 'default');
 defined('APPLICATION_ENV')          || define('APPLICATION_ENV', 'development'); //production utilizado pelo usuário final e development em fase de desenvolvimento
+defined('APPLICATION_URL')          || define('APPLICATION_URL', 'http://framework.localhost');

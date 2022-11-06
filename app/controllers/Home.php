@@ -7,6 +7,10 @@ use Core\View;
 use Models\Usuairos;
 class Home{
     public function index(){
+        $view = new View('usuario');
+        $view->show();
+    }
+    public function delete(){
         $user = new Usuairos(6);
         $user->delete();
         echo $user->nome . " - " . $user->email . "<hr>";
