@@ -6,16 +6,23 @@ namespace Core;
 class Action
 {
     private $router;
-    public function __construct()
+    public function __construct($controller=null,$action=METHOD_DEFAULT,$parameters = [])
     {
+        if($controller){
+            $this->router = Router::getRouterByController($controller,$action,$parameters);
+        }
+        
     }
-
 
     static function getActionByUrl($url)
     {
         $action = new Action;
         $action->router = Router::getRouterByUrl($url);
         return $action;
+    }
+
+    static function getActionByController($controller,$action,$parameters){
+        return new Action($controller, $action, $parameters);
     }
 
     public function run()
@@ -31,5 +38,9 @@ class Action
             return;
         }
         die("Rota não cadastrada!"); //mudar para página 404;
+    }
+
+    public function getUrl(){
+        return $this->router->getUrl();
     }
 }

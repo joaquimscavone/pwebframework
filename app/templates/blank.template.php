@@ -1,3 +1,4 @@
+<?php /** @var $template \Core\ViewElement */ ?>
 <!DOCTYPE html>
 <html lang="<?= $template->lang;?>">
 <head>
@@ -15,7 +16,7 @@
   <link rel="stylesheet" href="<?=APPLICATION_URL?>/assets/styles/adminlte.min.css">
 </head>
 <body class="hold-transition login-page">
-
+    <?php require $view?>
 <!-- jQuery -->
 <script src="<?=APPLICATION_URL?>/assets/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
