@@ -3,41 +3,36 @@
 
 namespace Core;
 
-class View{
+class View extends ViewElement{
 
-    private $view;
+   
     private $template;
 
-    private $__data = [];
+  
 
     public function __construct($view, $template = TEMPLATE_DEFAULT)
     {
-        $this->view = $view;
-        $this->template = $template;
+        parent::__construct($this->createStringRequireView($view));
+        $this->template = new ViewElement($this->createStringRequireTemplate($template));
     }
 
-    private function createStringRequire($path,$file){
-        if(substr($file,-4,4)!==".php"){
-            $file .= ".php";
+    private function createStringRequireView($file){
+        if(substr($file,-9,9)!==".view.php"){
+            $file .= ".view.php";
         }
-        return $path . "/" . $file;
+        return VIEWS_PATH . "/" . $file;
+    }
+    private function createStringRequireTemplate($file){
+        if(substr($file,-13,13)!==".template.php"){
+            $file .= ".template.php";
+        }
+        return TEMPLATES_PATH . "/" . $file;
     }
 
-    public function __get($name)
-    {
-        return (array_key_exists($name,$this->__data))?$this->__data[$name]:null;
-    }
-
-    public function __set($name, $value)
-    {
-        $this->__data[$name] = $value;
-    }
-
+   
 
     public function show($data = []){
-        extract(array_merge($this->__data, $data));
-        $view = $this->createStringRequire(VIEWS_PATH,$this->view);
-        require $this->createStringRequire(TEMPLATES_PATH,$this->template);
+        require $this->template;
     }
 
 }
