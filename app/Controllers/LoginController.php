@@ -16,5 +16,15 @@ class LoginController{
         $view->setTitle('Cadastre-se');
         $view->show();
     }
+    public function logar(){
+        
+    }
+    public function cadastrar()
+    {
+    }
+
+    public function redefinirSenha(){
+        
+    }
 
 }

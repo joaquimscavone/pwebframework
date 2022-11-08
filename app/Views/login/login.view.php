@@ -2,12 +2,12 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="../../index2.html" class="h1"><?=APPLICATION_NAME?></a>
+      <span class="h1"><?=APPLICATION_NAME?></span>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Login</p>
 
-      <form action="../../index3.html" method="post">
+      <form action="<?=$view->getUrl(\Controllers\LoginController::class,"logar")?>" method="post">
         <div class="input-group mb-3">
           <input type="email" class="form-control" placeholder="Email">
           <div class="input-group-append">
@@ -44,10 +44,10 @@
     
 
       <p class="mb-1">
-        <a href="forgot-password.html">Esqueci minha senha</a>
+        <a href="<?=$view->getUrl(\Controllers\LoginController::class,"redefinirSenha")?>">Esqueci minha senha</a>
       </p>
       <p class="mb-0">
-        <a href="register.html" class="text-center">Quero me cadastrar</a>
+        <a href="<?=$view->getUrl(\Controllers\LoginController::class,"cadastro")?>" class="text-center">Quero me cadastrar</a>
       </p>
     </div>
     <!-- /.card-body -->

@@ -39,7 +39,7 @@ class ViewElement{
         $this->__data = array_merge_recursive($this->__data, $data);
     }
 
-    public function url($controller,$method=METHOD_DEFAULT,$paramns=[]){
+    public function getUrl($controller,$method=METHOD_DEFAULT,$paramns=[]){
         return \Core\Action::getActionByController($controller,$method,$paramns)->getUrl();
     }
 
