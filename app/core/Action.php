@@ -34,7 +34,7 @@ class Action
                     $controller,
                     $this->router->getMethod()
                 ]
-            , $this->router->getParameters());
+            , array_merge($this->router->getParameters(),[Request::getRequest()]));
             return;
         }
         die("Rota não cadastrada!"); //mudar para página 404;
