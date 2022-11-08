@@ -19,3 +19,5 @@ defined('TEMPLATE_DEFAULT')         || define('TEMPLATE_DEFAULT', 'main.template
 defined('CONNECTION_NAME_DEFAULT')  || define('CONNECTION_NAME_DEFAULT', 'default');
 defined('APPLICATION_ENV')          || define('APPLICATION_ENV', 'development'); //production utilizado pelo usuário final e development em fase de desenvolvimento
 defined('APPLICATION_URL')          || define('APPLICATION_URL', 'http://framework.localhost');
+defined('APPLICATION_LANG')         || define('APPLICATION_LANG', 'pt-br');
+defined('APPLICATION_NAME')          || define('APPLICATION_NAME', 'Framework');

@@ -14,6 +14,7 @@ class View extends ViewElement{
     {
         parent::__construct($this->createStringRequireView($view));
         $this->template = new ViewElement($this->createStringRequireTemplate($template));
+        $this->template->mergeData(Configs::getConfig('views'));
     }
 
     private function createStringRequireView($file){
@@ -30,8 +31,21 @@ class View extends ViewElement{
     }
 
    
+    public function setTitle($title){
+        $fix = $this->template->title_prefix;
+        if(!empty($fix)){
+            $title = $fix . $title;
+        }
+        $fix = $this->template->title_prosfix;
+        if(!empty($fix)){
+            $title = $title.$fix;
+        }
+        $this->template->title = $title;
+    }
+
 
     public function show($data = []){
+        $template = $this->template;
         require $this->template;
     }
 

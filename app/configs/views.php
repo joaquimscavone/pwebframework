@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'default_title' => '',
-    'prefix_title' => '',
-    'posfix_title' => '',
-
+    'title' => APPLICATION_NAME,
+    'title_prefix' => '',
+    'title_prosfix' => " | ".APPLICATION_NAME,
+    'lang'=>'pt-br',
 ];

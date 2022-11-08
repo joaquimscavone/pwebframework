@@ -30,10 +30,16 @@ class ViewElement{
     {
         return $this->view;
     }
+    public function __isset($name)
+    {
+        return array_key_exists($name,$this->__data);
+    }
 
-
+    public function mergeData(array $data){
+        $this->__data = array_merge_recursive($this->__data, $data);
+    }
     public function show($data = []){
-        extract(array_merge($this->__data, $data));
+        extract(array_merge_recursive($this->__data, $data));
         require $this;
     }
 
