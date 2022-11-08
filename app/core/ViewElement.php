@@ -38,6 +38,11 @@ class ViewElement{
     public function mergeData(array $data){
         $this->__data = array_merge_recursive($this->__data, $data);
     }
+
+    public function url($controller,$method=METHOD_DEFAULT,$paramns=[]){
+        return \Core\Action::getActionByController($controller,$method,$paramns)->getUrl();
+    }
+
     public function show($data = []){
         extract(array_merge_recursive($this->__data, $data));
         require $this;

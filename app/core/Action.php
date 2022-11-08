@@ -21,7 +21,7 @@ class Action
         return $action;
     }
 
-    static function getActionByController($controller,$action,$parameters){
+    static function getActionByController($controller,$action=METHOD_DEFAULT,$parameters = []){
         return new Action($controller, $action, $parameters);
     }
 
@@ -41,6 +41,6 @@ class Action
     }
 
     public function getUrl(){
-        return $this->router->getUrl();
+        return APPLICATION_URL.'/'.$this->router->getUrl();
     }
 }
