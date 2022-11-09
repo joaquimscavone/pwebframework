@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Core\Request;
+use Core\Session;
 use Core\View;
 class LoginController{
     public function index(){
