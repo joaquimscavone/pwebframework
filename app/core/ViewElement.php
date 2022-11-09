@@ -43,7 +43,7 @@ class ViewElement{
         return \Core\Action::getActionByController($controller,$method,$paramns)->getUrl();
     }
 
-    public function show($data = []){
+    public function show(array $data = []){
         extract(array_merge_recursive($this->__data, $data));
         require $this;
     }

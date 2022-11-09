@@ -1,12 +1,12 @@
 <div class="register-box">
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <span class="h1"><?=APPLICATION_NAME?></span>
+      <span class="h1"><?= APPLICATION_NAME ?></span>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Registre-se</p>
-
-      <form action="<?=$view->getUrl(\Controllers\LoginController::class,"cadastrar")?>" method="post">
+      <?php (new \Components\AlertComponent())->show()?>
+      <form action="<?= $view->getUrl(\Controllers\LoginController::class, "cadastrar") ?>" method="post">
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Nome completo" name="nome">
           <div class="input-group-append">
@@ -44,7 +44,7 @@
             <div class="icheck-primary">
               <input type="checkbox" id="agreeTerms" name="terms" value="agree">
               <label for="agreeTerms">
-               Eu aceito os <a href="<?=$view->getUrl(\Controllers\TermosController::class)?>" target="_blank">termos do serviço terms</a>
+                Eu aceito os <a href="<?= $view->getUrl(\Controllers\TermosController::class) ?>" target="_blank">termos do serviço terms</a>
               </label>
             </div>
           </div>
@@ -57,7 +57,7 @@
       </form>
 
 
-      <a href="<?=$view->getUrl(\Controllers\LoginController::class)?>" class="text-center">Já possuo cadastro</a>
+      <a href="<?= $view->getUrl(\Controllers\LoginController::class) ?>" class="text-center">Já possuo cadastro</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->
