@@ -8,7 +8,7 @@
       <?php \Components\AlertComponent::flushMessage();?>
       <form action="<?= $view->getUrl(\Controllers\LoginController::class, "cadastrar") ?>" method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Nome completo" name="nome">
+          <input type="text" class="form-control" placeholder="Nome completo" name="nome" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -16,7 +16,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email" name="email">
+          <input type="email" class="form-control" placeholder="Email" name="email" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -24,7 +24,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Senha" name="senha">
+          <input type="password" class="form-control" placeholder="Senha" name="senha" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Repita a Senha" name="confirmacao">
+          <input type="password" class="form-control" placeholder="Repita a Senha" name="confirmacao" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -42,7 +42,7 @@
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms" name="termo" value="agree">
+              <input type="checkbox" id="agreeTerms" name="termo" value="agree" required>
               <label for="agreeTerms">
                 Eu aceito os <a href="<?= $view->getUrl(\Controllers\TermosController::class) ?>" target="_blank">termos do serviço terms</a>
               </label>

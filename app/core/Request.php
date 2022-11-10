@@ -9,7 +9,9 @@ class Request{
 
     private function __construct()
     {
-        
+        $session = Session::getSession();
+        $session->last_page = $session->current_page;
+        $session->current_page = $this->url;
     }
 
     public static function getRequest(){
@@ -43,5 +45,9 @@ class Request{
 
     public function getData(){
 
+    }
+
+    public function getLastAction(){
+        return Action::getActionByUrl(Session::getSession()->last_page);
     }
 }

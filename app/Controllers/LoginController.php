@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Components\AlertComponent;
 use Core\Request;
 use Core\Session;
 use Core\View;
@@ -26,19 +27,22 @@ class LoginController{
         //validar os dados recebidos
         $erros = [];
         if($request->isEmpty('nome')){
-            $erros[] = 'Nome é um campo obrigatório';
+            $erros[] = '*Nome é um campo obrigatório';
         }
         if($request->isEmpty('email')){
-            $erros[] = 'email é um campo obrigatório';
+            $erros[] = '*Email é um campo obrigatório';
         }
         
         if ($request->isEmpty('senha') || $request->senha != $request->confirmacao) {
-            $erros[] = 'A Senha e a Confirmação são campos obrigatórios e devem ser iguais';
+            $erros[] = '*A Senha e a Confirmação são campos obrigatórios e devem ser iguais';
         }
         if($request->isEmpty('termo')){
-            $erros[] = 'Você deve aceitar os termos de serviço para se cadastrar';
+            $erros[] = '*Você deve aceitar os termos de serviço para se cadastrar';
         }
-        var_dump($erros);
+        if(count($erros)){
+            AlertComponent::addFlashMessage('Erros de preechimento!', $erros, AlertComponent::ALERT_WARNING);
+            $request->getLastAction()->redirect();
+        }
         //caso tenha uma falhar enviar o feedback;
 
         //validar integridade da dabse de dados;

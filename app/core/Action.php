@@ -43,4 +43,9 @@ class Action
     public function getUrl(){
         return APPLICATION_URL.'/'.$this->router->getUrl();
     }
+
+    public function redirect(){
+        header('location:' . $this->getUrl());
+        die();
+    }
 }
