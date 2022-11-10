@@ -6,7 +6,7 @@
     </div>
     <div class="card-body">
       <p class="login-box-msg">Login</p>
-      <?php (new \Components\AlertComponent())->show()?>
+      <?php \Components\AlertComponent::flushMessage();?>
       <form action="<?=$view->getUrl(\Controllers\LoginController::class,"logar")?>" method="post">
         <div class="input-group mb-3">
           <input type="email" class="form-control" placeholder="Email">

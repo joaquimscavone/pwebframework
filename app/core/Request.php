@@ -37,6 +37,10 @@ class Request{
         return array_key_exists($name, $_REQUEST);
     }
 
+    public function isEmpty($name){
+        return empty(str_replace(' ','',$this->$name));
+    }
+
     public function getData(){
 
     }

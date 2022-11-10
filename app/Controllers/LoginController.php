@@ -23,16 +23,30 @@ class LoginController{
     }
     public function cadastrar(Request $request)
     {
+        //validar os dados recebidos
         $erros = [];
-        if(!isset($request->nome)){
+        if($request->isEmpty('nome')){
             $erros[] = 'Nome é um campo obrigatório';
         }
-        if(!isset($request->email)){
+        if($request->isEmpty('email')){
             $erros[] = 'email é um campo obrigatório';
         }
-        if(!isset($request->senha) || !isset($request->confirmacao)){
-            $erros[] = 'A Senha e a Confirmação são campos obrigatórios';
+        
+        if ($request->isEmpty('senha') || $request->senha != $request->confirmacao) {
+            $erros[] = 'A Senha e a Confirmação são campos obrigatórios e devem ser iguais';
         }
+        if($request->isEmpty('termo')){
+            $erros[] = 'Você deve aceitar os termos de serviço para se cadastrar';
+        }
+        var_dump($erros);
+        //caso tenha uma falhar enviar o feedback;
+
+        //validar integridade da dabse de dados;
+        //feedback de falha de integridade;
+
+        //inserir na base;
+        //feedback de sucesso;
+
     }
 
     public function redefinirSenha(){

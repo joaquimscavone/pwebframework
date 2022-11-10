@@ -36,17 +36,20 @@ class AlertComponent extends ViewElement{
         }
         return $array;
     }
-
+    /**
+     * cria uma alerta na tela
+     * @param array $data['tite'=>string, 'text'=>string|array, 'type'=>string]
+     * @return void
+     */
     public function show(array $data = []){
-        $title = (array_key_exists('title', $data)) ? $data['title'] : $this->title;
-        $text = (array_key_exists('text', $data)) ? $data['text'] : $this->text;
+        $title  = (array_key_exists('title', $data)) ? $data['title'] : $this->title;
+        $text   = (array_key_exists('text', $data)) ? $data['text'] : $this->text;
+        $text   = (is_array($text)) ? implode('<br>', $text) : $text;
         [$type,$icon] = $this->typeValidate((array_key_exists('type', $data)) ? $data['type'] : $this->type);
 
         echo "<div class='alert alert-$type alert-dismissible'>
         <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-        <h5><i class='icon $icon'></i> $title</h5>
-        $text
-      </div>";
+        <div><i class='icon $icon'></i> <strong>$title</strong></div> $text </div>";
     }
 
     public static function addFlashMessage($title,$text,$type = self::ALERT_INFO){
