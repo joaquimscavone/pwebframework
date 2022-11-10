@@ -5,7 +5,7 @@
     </div>
     <div class="card-body">
       <p class="login-box-msg">Registre-se</p>
-      <?php (new \Components\AlertComponent('Testando alert','Este é o meu teste de alerte',\Components\AlertComponent::ALERT_WARNING))->show()?>
+      <?php \Components\AlertComponent::flushMessage();?>
       <form action="<?= $view->getUrl(\Controllers\LoginController::class, "cadastrar") ?>" method="post">
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Nome completo" name="nome">

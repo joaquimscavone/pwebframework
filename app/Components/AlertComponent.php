@@ -2,6 +2,8 @@
 
 
 namespace Components;
+
+use Core\Session;
 use Core\ViewElement;
 
 class AlertComponent extends ViewElement{
@@ -10,6 +12,8 @@ class AlertComponent extends ViewElement{
     const ALERT_WARNING = 'warning';
     const ALERT_SUCCESS = 'success';
     private $title,$text,$type;
+
+    private static $message_session_name = '__FLASH_MESSAGE__';
     public function __construct($title="",$text="",$type = self::ALERT_INFO)
     {
         $this->title = $title;
@@ -44,29 +48,28 @@ class AlertComponent extends ViewElement{
         $text
       </div>";
     }
+
+    public static function addFlashMessage($title,$text,$type = self::ALERT_INFO){
+        $session = Session::getSession();
+        $msn = self::$message_session_name;
+        if(!isset($session->$msn)){
+            $session->$msn = [];
+        }
+        $alerts = $session->$msn;
+        $alerts[] = ['title'=>$title, 'text'=>$text, 'type'=>$type];
+        $session->$msn = $alerts;
+    }
+
+    public static function flushMessage(){
+        $session = Session::getSession();
+        $msn = self::$message_session_name;
+        if (isset($session->$msn)) {
+            foreach ($session->$msn as $alert) {
+                $obj = new AlertComponent($alert['title'], $alert['text'], $alert['type']);
+                $obj->show();
+            }
+        }
+        $session->$msn = [];
+    }
 }
 
-// <div class="alert alert-danger alert-dismissible">
-// <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-// <h5><i class="icon fas fa-ban"></i> Alert!</h5>
-// Danger alert preview. This alert is dismissable. A wonderful serenity has taken possession of my
-// entire
-// soul, like these sweet mornings of spring which I enjoy with my whole heart.
-// </div>
-
-
-// <div class="alert alert-info alert-dismissible">
-// <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-// <h5><i class="icon fas fa-info"></i> Alert!</h5>
-// Info alert preview. This alert is dismissable.
-// </div>
-// <div class="alert alert-warning alert-dismissible">
-// <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-// <h5><i class="icon fas fa-exclamation-triangle"></i> Alert!</h5>
-// Warning alert preview. This alert is dismissable.
-// </div>
-// <div class="alert alert-success alert-dismissible">
-// <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-// <h5><i class="icon fas fa-check"></i> Alert!</h5>
-// Success alert preview. This alert is dismissable.
-// </div>

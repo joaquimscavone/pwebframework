@@ -8,7 +8,8 @@ class HomeController{
         $view = new View('login/login','blank');
         $view->setTitle('Login');
         //$view->show();
-        echo \Core\Action::getActionByController(LoginController::class)->getUrl();
+        \Components\AlertComponent::addFlashMessage('Deu certo!','Sua conta foi criada','success');
+        var_dump($_SESSION);
     }
 
 }
