@@ -3,9 +3,11 @@
 namespace Controllers;
 
 use Components\AlertComponent;
+use Core\Action;
 use Core\Request;
 use Core\Session;
 use Core\View;
+use Models\Usuairos;
 class LoginController{
     public function index(){
         $view = new View('login/login','blank');
@@ -40,16 +42,30 @@ class LoginController{
             $erros[] = '*Você deve aceitar os termos de serviço para se cadastrar';
         }
         if(count($erros)){
+            //caso tenha uma falhar enviar o feedback;
             AlertComponent::addFlashMessage('Erros de preechimento!', $erros, AlertComponent::ALERT_WARNING);
             $request->getLastAction()->redirect();
         }
-        //caso tenha uma falhar enviar o feedback;
+
 
         //validar integridade da dabse de dados;
+        $usuario = new Usuairos();
+        $usuario->nome = $request->nome;
+        $usuario->email = $request->email;
+        $usuario->senha = $request->senha;
+        try{
+         //inserir na base;
+            $usuario->save();
+        }catch(\Exception $e){
+            AlertComponent::addFlashMessage('Erros de preechimento!', $e->getMessage(), AlertComponent::ALERT_WARNING);
+            $request->getLastAction()->redirect();
+        }
         //feedback de falha de integridade;
 
-        //inserir na base;
+        
         //feedback de sucesso;
+        AlertComponent::addFlashMessage('Usuário Cadastrado', "{$usuario->nome} foi cadastrado com sucesso!", AlertComponent::ALERT_SUCCESS);
+        Action::getActionByController(self::class)->redirect();
 
     }
 

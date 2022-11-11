@@ -10,6 +10,13 @@ class Request{
     private function __construct()
     {
         $session = Session::getSession();
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $request = md5(implode('', $_POST));
+            if($request === $session->request_key){
+                $this->getLastAction()->redirect();
+            }
+            $session->request_key = $request;
+        }
         $session->last_page = $session->current_page;
         $session->current_page = $this->url;
     }
