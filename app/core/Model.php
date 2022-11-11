@@ -105,7 +105,7 @@ abstract class Model{
 
     public function save($data = []){
         $data = array_merge($this->data, $data);
-        if($this->___exists___){
+        if($this->isStorage()){
             return $this->update($data);
         }
         return $this->insert($data);
@@ -151,6 +151,10 @@ abstract class Model{
 
     protected function storage($status = true){
         $this->___exists___ = $status;
+    }
+
+    public function isStorage(){
+        return $this->___exists___;
     }
 
 
@@ -215,6 +219,14 @@ abstract class Model{
         (is_null($offset)) || $this->limit['offset'] = $offset;
         $this->limit['limit'] = $limit;
         return $this;
+    }
+
+    public function exists($column,$value,$id_excluded = null){
+        $this->addWhere($column, '=', $value);
+        if(isset($id_excluded)){
+            $this->addWhere($this->pk, '<>', $id_excluded);
+        }
+        return $this->get() !== false;
     }
 
 }

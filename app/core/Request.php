@@ -16,6 +16,8 @@ class Request{
                 $this->getLastAction()->redirect();
             }
             $session->request_key = $request;
+        }else{
+            unset($session->request_key);
         }
         $session->last_page = $session->current_page;
         $session->current_page = $this->url;
