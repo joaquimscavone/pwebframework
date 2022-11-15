@@ -1,13 +1,12 @@
 <?php
 
-namespace Controllers;
+namespace Controllers\Login;
 
-use Components\AlertComponent;
-use Core\Action;
-use Core\Request;
-use Core\Session;
-use Core\View;
-use Models\Usuairos;
+use \Components\AlertComponent;
+use \Core\Action;
+use \Core\Request;
+use \Core\View;
+use \Models\Usuairos;
 class LoginController{
     public function index(){
         $view = new View('login/login','blank');
