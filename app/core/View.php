@@ -47,6 +47,7 @@ class View extends ViewElement{
     public function show(array $data = []){
         $template = $this->template;
         $view = new ViewElement((string) $this);
+        $view->mergeData($this->getData());
         $view->mergeData($data);
         require $this->template;
     }
