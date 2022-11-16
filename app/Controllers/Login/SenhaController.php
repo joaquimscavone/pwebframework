@@ -2,6 +2,7 @@
 
 
 namespace Controllers\Login;
+use Core\View;
 
 class SenhaController{
 
@@ -10,7 +11,9 @@ class SenhaController{
      * @return void
      */
     public function index(){
-
+        $view = new View('login/senha-esquecida', 'blank');
+        $view->setTitle('Recuperar Senha');
+        $view->show();
     }
 
     /**
@@ -26,7 +29,9 @@ class SenhaController{
      */
     public function telaRedefinirSenha()
     {
-
+        $view = new View('login/senha-recuperacao', 'blank');
+        $view->setTitle('Recuperar Senha');
+        $view->show();
     }
     /**
      * Altera a senha do usuário para a informada;

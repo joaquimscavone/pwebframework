@@ -7,7 +7,7 @@
     <div class="card-body">
       <p class="login-box-msg">Login</p>
       <?php \Components\AlertComponent::flushMessage();?>
-      <form action="<?=$view->getUrl(\Controllers\LoginController::class,"logar")?>" method="post">
+      <form action="<?=$view->getUrl(\Controllers\Login\LoginController::class,"logar")?>" method="post">
         <div class="input-group mb-3">
           <input type="email" class="form-control" placeholder="Email">
           <div class="input-group-append">
@@ -44,10 +44,10 @@
     
 
       <p class="mb-1">
-        <a href="<?=$view->getUrl(\Controllers\LoginController::class,"redefinirSenha")?>">Esqueci minha senha</a>
+        <a href="<?=$view->getUrl(\Controllers\Login\SenhaController::class,"index")?>">Esqueci minha senha</a>
       </p>
       <p class="mb-0">
-        <a href="<?=$view->getUrl(\Controllers\LoginController::class,"cadastro")?>" class="text-center">Quero me cadastrar</a>
+        <a href="<?=$view->getUrl(\Controllers\Login\LoginController::class,"cadastro")?>" class="text-center">Quero me cadastrar</a>
       </p>
     </div>
     <!-- /.card-body -->

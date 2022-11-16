@@ -6,7 +6,7 @@
     <div class="card-body">
       <p class="login-box-msg">Registre-se</p>
       <?php \Components\AlertComponent::flushMessage();?>
-      <form action="<?= $view->getUrl(\Controllers\LoginController::class, "cadastrar") ?>" method="post">
+      <form action="<?= $view->getUrl(\Controllers\Login\LoginController::class, "cadastrar") ?>" method="post">
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Nome completo" name="nome" required>
           <div class="input-group-append">
@@ -57,7 +57,7 @@
       </form>
 
 
-      <a href="<?= $view->getUrl(\Controllers\LoginController::class) ?>" class="text-center">Já possuo cadastro</a>
+      <a href="<?= $view->getUrl(\Controllers\Login\LoginController::class) ?>" class="text-center">Já possuo cadastro</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

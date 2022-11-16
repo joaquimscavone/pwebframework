@@ -2,7 +2,7 @@
 CREATE DATABASE framework
     DEFAULT CHARACTER SET = 'utf8mb4';
 
-CREATE TABLE usuarios(  
+CREATE TABLE framework.usuarios(  
     cod_usuario int NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Primary Key',
     nome VARCHAR(150) NOT NULL,
     email VARCHAR(150) NOT NULL,
