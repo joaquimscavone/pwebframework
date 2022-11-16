@@ -21,7 +21,7 @@ class SenhaController{
      * @return void
      */
     public function criarRegistroEsqueciMinhaSenha(){
-
+        die('vou te mandar um e-mail');
     }
     /**
      * Chama a tela para redefinir a senha
@@ -38,6 +38,6 @@ class SenhaController{
      * @return void
      */
     public function actionRedefinirSenha(){
-
+        die('senha alterada');
     }
 }
