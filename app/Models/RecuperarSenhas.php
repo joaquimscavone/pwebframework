@@ -37,12 +37,23 @@ class RecuperarSenhas extends Model
     /**
      * Criar uma recuperação de senha para o e-mail informado.
      * @param mixed $email
-     * @return Usuairos | false;
+     * @return RecuperarSenha | false;
      */
     public function create($email)
     {
         // verificar se o e-mail existe;
-        // verificar se já existe um recuperar senha funcionando para este e-mail
+        $usuario = Usuairos::getUserByEmail($email);
+        if($usuario){
+            // verificar se já existe um recuperar senha funcionando para este e-mail
+        }
+        
         //inserir essa nova informação
+        return false;
+    }
+
+    private static function getRecuperarSenhaPeloUsuario($cod_usuario){
+        $recuperar = new RecuperarSenhas();
+        $recuperar->addWhere('cod_usuario','=',$cod_usuario);
+
     }
 }

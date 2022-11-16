@@ -74,8 +74,14 @@ abstract class DataBaseDriver
         $data = [];
         foreach ($where as $key => $cond) {
             $sql .= ($key) ? " {$cond['logic']} " : " WHERE ";
-            $sql .= "{$cond['column']} {$cond['comparation']} :where_cond_value_$key";
-            $data[":where_cond_value_$key"] = $cond['value'];
+            if($cond['comparation']==='IS'){
+                $sql .= "{$cond['column']} {$cond['comparation']} ".
+                ((strtoupper($cond['value'])==='NULL')?'NULL':'NOT NULL');
+            }else{
+                $sql .= "{$cond['column']} {$cond['comparation']} :where_cond_value_$key";
+                $data[":where_cond_value_$key"] = $cond['value'];
+            }
+         
         }
         return [$sql, $data];
     }

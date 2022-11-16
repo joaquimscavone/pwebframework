@@ -30,7 +30,7 @@ abstract class Model{
     protected $limit;
 
     protected $comparasion_operators = [
-        '=','<>',">",'<','>=','<=','like'
+        '=','<>',">",'<','>=','<=','LIKE', 'IS'
     ];
     public function __construct($id = null)
     {
@@ -163,6 +163,7 @@ abstract class Model{
         if(!in_array($column,$this->columns)){
             throw new Exception("Impossível criar o where, $column não existe no array columns da class ".$this::class);
         }
+        $comparasion_operator = strtoupper($comparasion_operator);
         if(!in_array($comparasion_operator,$this->comparasion_operators)){
             throw new Exception("$comparasion_operator não existe na lista de Operadores aceitos na class ".Model::class);
         }

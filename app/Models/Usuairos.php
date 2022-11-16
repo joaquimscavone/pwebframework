@@ -26,4 +26,10 @@ class Usuairos extends Model
         }
         parent::save($data);
     }
+
+    public static function  getUserByEmail($email){
+        $user = new Usuairos;
+        $user->addWhere('email', '=', $email);
+        return $user->get();
+    }
 }
