@@ -4,6 +4,7 @@ namespace Models;
 
 use Core\Configs;
 use Core\Date;
+use Core\Hash;
 use Core\Model;
 use DateTime;
 
@@ -42,7 +43,7 @@ class RecuperarSenhas extends Model
     /**
      * Criar uma recuperação de senha para o e-mail informado.
      * @param mixed $email
-     * @return RecuperarSenha | false;
+     * @return RecuperarSenha|false;
      */
     public function create($email)
     {
@@ -59,8 +60,8 @@ class RecuperarSenhas extends Model
                 $recuperar->expire();
             }
             $this->cod_usuario = $usuario->cod_usuario; 
-            $this->hash1 = 'dfasfkladçla';
-            $this->hash2 = 'fakljfdajf';
+            $this->hash1 = new Hash;
+            $this->hash2 = new Hash;
             $this->expiracao_data_hora = new Date();
             $this->expiracao_data_hora->modifySeconds($this->timeout);
             parent::save();
@@ -69,7 +70,7 @@ class RecuperarSenhas extends Model
         }
         
         //inserir essa nova informação
-        return true;
+        return false;
     }
 
     public function expire(){

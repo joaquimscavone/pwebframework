@@ -10,10 +10,6 @@ class HomeController{
         $view->setTitle('Redefinir senha');
         $view->usuario = 'Joaquim Scavone';
         //$view->show();
-        $recuperar = new RecuperarSenhas();
-        $retorno = $recuperar->create('joaquim.scavone@ifto.edu.br');
-        var_dump($retorno);
-
     }
 
 }
