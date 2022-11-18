@@ -16,4 +16,9 @@ class Date extends DateTime{
     public function diffSeconds(DateTime $date = new Date()){
         return $date->getTimestamp() - $this->getTimestamp();
     }
+
+    public function modifySeconds(int $seconds)
+    {
+        return parent::modify("$seconds second");
+    }
 }

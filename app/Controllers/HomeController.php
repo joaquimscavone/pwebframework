@@ -11,7 +11,9 @@ class HomeController{
         $view->usuario = 'Joaquim Scavone';
         //$view->show();
         $recuperar = new RecuperarSenhas();
-        $recuperar->create('joaquim.scavone@ifto.edu.br');
+        $retorno = $recuperar->create('joaquim.scavone@ifto.edu.br');
+        var_dump($retorno);
+
     }
 
 }

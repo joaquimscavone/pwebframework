@@ -23,6 +23,7 @@ class RecuperarSenhas extends Model
     ];
 
     private $delay, $timeout;
+    private $usuario;
     public function __construct()
     {
         $configs = Configs::getConfig('users');
@@ -51,24 +52,39 @@ class RecuperarSenhas extends Model
             $recuperar = $this->getRegisterFromUser($usuario->cod_usuario);
             if($recuperar){
                 $data_criacao = new Date($recuperar->criacao_data_hora);
-                if($data_criacao->diffSeconds()>$this->delay){
-                    echo 'dizer que essa requisição exipirou';
+                if($data_criacao->diffSeconds()<$this->delay){
+                    //cancelar requisição pois existe uma que ainda está em delay;
+                    return false;
                 }
-             
+                $recuperar->expire();
             }
-          
-            // verificar se já existe um recuperar senha funcionando para este e-mail
+            $this->cod_usuario = $usuario->cod_usuario; 
+            $this->hash1 = 'dfasfkladçla';
+            $this->hash2 = 'fakljfdajf';
+            $this->expiracao_data_hora = new Date();
+            $this->expiracao_data_hora->modifySeconds($this->timeout);
+            parent::save();
+            $this->usuario = $usuario;
+            return $this;
         }
         
         //inserir essa nova informação
-        return false;
+        return true;
+    }
+
+    public function expire(){
+        return parent::save(['expiracao_data_hora' => new Date]);
     }
 
     private function getRegisterFromUser($cod_usuario){
         $recuperar = new RecuperarSenhas();
         $recuperar->addWhere('cod_usuario','=',$cod_usuario);
         $recuperar->addWhere('utilizacao_data_hora', 'is', 'null');
-        $recuperar->addWhere('expiracao_data_hora', '>', (new DateTime())->format('Y-m-d H:i:s'));
+        $recuperar->addWhere('expiracao_data_hora', '>', new Date);
         return $recuperar->get();
+    }
+
+    public function getUser(){
+        return $this->usuario;
     }
 }
