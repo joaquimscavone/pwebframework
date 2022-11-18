@@ -22,3 +22,4 @@ defined('APPLICATION_ENV')          || define('APPLICATION_ENV', 'development');
 defined('APPLICATION_URL')          || define('APPLICATION_URL', 'http://framework.localhost');
 defined('APPLICATION_LANG')         || define('APPLICATION_LANG', 'pt-br');
 defined('APPLICATION_NAME')         || define('APPLICATION_NAME', 'Framework');
+defined('TIME_ZONE')                || define('TIME_ZONE', 'America/Araguaina');

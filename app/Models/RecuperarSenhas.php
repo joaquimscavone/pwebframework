@@ -3,6 +3,7 @@
 namespace Models;
 
 use Core\Configs;
+use Core\Date;
 use Core\Model;
 use DateTime;
 
@@ -49,7 +50,11 @@ class RecuperarSenhas extends Model
         if($usuario){
             $recuperar = $this->getRegisterFromUser($usuario->cod_usuario);
             if($recuperar){
-                echo $recuperar->criacao_data_hora;
+                $data_criacao = new Date($recuperar->criacao_data_hora);
+                if($data_criacao->diffSeconds()>$this->delay){
+                    echo 'dizer que essa requisição exipirou';
+                }
+             
             }
           
             // verificar se já existe um recuperar senha funcionando para este e-mail
