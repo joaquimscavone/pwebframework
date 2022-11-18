@@ -4,6 +4,7 @@ namespace Models;
 
 use Core\Configs;
 use Core\Model;
+use DateTime;
 
 class RecuperarSenhas extends Model
 {
@@ -27,6 +28,8 @@ class RecuperarSenhas extends Model
         foreach($configs['forgot_password'] as $config => $value){
             $this->$config = $value;
         }
+
+        parent::__construct();
         
     }
 
@@ -44,6 +47,11 @@ class RecuperarSenhas extends Model
         // verificar se o e-mail existe;
         $usuario = Usuairos::getUserByEmail($email);
         if($usuario){
+            $recuperar = $this->getRegisterFromUser($usuario->cod_usuario);
+            if($recuperar){
+                echo $recuperar->criacao_data_hora;
+            }
+          
             // verificar se já existe um recuperar senha funcionando para este e-mail
         }
         
@@ -51,9 +59,11 @@ class RecuperarSenhas extends Model
         return false;
     }
 
-    private static function getRecuperarSenhaPeloUsuario($cod_usuario){
+    private function getRegisterFromUser($cod_usuario){
         $recuperar = new RecuperarSenhas();
         $recuperar->addWhere('cod_usuario','=',$cod_usuario);
-
+        $recuperar->addWhere('utilizacao_data_hora', 'is', 'null');
+        $recuperar->addWhere('expiracao_data_hora', '>', (new DateTime())->format('Y-m-d H:i:s'));
+        return $recuperar->get();
     }
 }
