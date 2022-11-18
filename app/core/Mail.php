@@ -4,14 +4,16 @@
 namespace Core;
 
 use Core\Interfaces\Mail as InterfacesMail;
+use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 
 class Mail implements InterfacesMail
 {
 
 
-    private $host, $username, $password, $port_smtp, $port_imap, $signature,$address = [];
-    private $subject, $body_type, $body, $charset;
+    private $host, $username, $password, $port_smtp, $port_imap, $signature, $address = [];
+    private $subject, $body_type, $body, $charset, $phpmailler;
 
     public function __construct()
     {
@@ -30,7 +32,7 @@ class Mail implements InterfacesMail
      */
     public function addAddress(string $email, string $name = "")
     {
-        $this->address[] = ['email'=>$email, 'name' => $name];
+        $this->address[] = ['email' => $email, 'name' => $name];
         return $this;
     }
 
@@ -80,7 +82,7 @@ class Mail implements InterfacesMail
      */
     public function setViewBody(ViewElement $view)
     {
-        
+
         $this->body = $view;
         $this->body_type = 'viewElement';
         return $this;
@@ -95,13 +97,66 @@ class Mail implements InterfacesMail
         return false;
     }
 
+
+    private function phpMaillerSererverSettings()
+    {
+        $mail = new PHPMailer(true);
+        $mail->SMTPDebug = (APPLICATION_ENV === 'development') ? SMTP::DEBUG_SERVER : SMTP::DEBUG_OFF;                      //Enable verbose debug output
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host       = $this->host;                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = $this->username;                     //SMTP username
+        $mail->Password   = $this->password;                               //SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+        $mail->Port       = $this->port_smtp;                                    //TCP port to connect to; use 587 if you have 
+        $mail->CharSet = $this->charset;
+        $this->phpmailler = $mail;
+    }
+
+    private function phpMaillerRecipients()
+    {
+        $this->phpmailler->setFrom($this->username, $this->signature);
+        foreach ($this->address as $address) {
+            $this->phpmailler->addAddress($address['email'], $address['name']);     //Add a recipient
+        }
+    }
+
+    private function phpMaillerContent()
+    {
+        //Content
+        if ($this->body_type === 'html') {
+            $this->phpmailler->isHTML(true);
+            $this->phpmailler->Body    = $this->body;                                 //Set ethis->phpmailler format to HTML
+        } elseif ($this->body_type === 'viewElement') {
+            $this->phpmailler->isHTML(true);
+            ob_start();
+            $this->body->show();
+            $result = ob_get_contents();
+            ob_end_clean();
+            $this->phpmailler->Body = $result;
+        } else {
+            $this->phpmailler->isHTML(false);
+            $this->phpmailler->Body = $this->body;
+        }                             //Set ethis->phpmailler format to HTML
+        $this->phpmailler->Subject = $this->subject;
+    }
+
+
     /**
      * envia o e-mail
      * @return bool
      */
     public function send()
     {
-       
+        $this->phpMaillerSererverSettings();
+        $this->phpMaillerRecipients();
+        $this->phpMaillerContent();
+        try {
+            $this->phpmailler->send();
+            return true;
+        } catch (\Exception $e) {
+           throw new Exception("Message could not be sent. Mailer Error: {$this->phpmailler->ErrorInfo}");
+        }
     }
 
     /**
