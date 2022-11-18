@@ -10,6 +10,7 @@ defined('VIEWS_PATH')               || define('VIEWS_PATH', APP_PATH . '/Views')
 defined('CONTROLLERS_PATH')         || define('CONTROLLERS_PATH', APP_PATH . '/Controllers');
 defined('MODELS_PATH')              || define('MODELS_PATH', APP_PATH . '/Models');
 defined('CONFIGS_PATH')             || define('CONFIGS_PATH', APP_PATH . '/Configs');
+defined('LIBS_PATH')                || define('LIBS_PATH', APPLICATION_PATH . '/Libs');
 
 
 
