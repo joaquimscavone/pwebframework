@@ -25,7 +25,7 @@
                                     <tr>
                                       <td> <a href="<?=$view->getUrl(\Controllers\Login\SenhaController::class,
                                       'telaRedefinirSenha'
-                                      ,[])?>" target="_blank">Redefinir Senha</a> </td>
+                                      ,['hash1'=>$view->hash1, 'hash2'=>$view->hash2])?>" target="_blank">Redefinir Senha</a> </td>
                                     </tr>
                                   </tbody>
                                 </table>

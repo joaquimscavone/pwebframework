@@ -29,12 +29,14 @@ class Action
     {
         if ($this->router) {
             $controller = new ($this->router->getController());
+            $paramaters = array_values($this->router->getParameters());
+            $paramaters[] = Request::getRequest();
             call_user_func_array(
                 [
                     $controller,
                     $this->router->getMethod()
                 ]
-            , array_merge($this->router->getParameters(),[Request::getRequest()]));
+            , $paramaters);
             return;
         }
         die("Rota não cadastrada!"); //mudar para página 404;

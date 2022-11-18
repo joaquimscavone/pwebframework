@@ -13,5 +13,5 @@ Core\Router::add('/termos-de-servico',Controllers\TermosController::class,'index
 //rotas de redefinição de senha
 Core\Router::add('/esqueici-minha-senha',Controllers\Login\SenhaController::class,'index');
 Core\Router::add('/senha/registrar',Controllers\Login\SenhaController::class,'criarRegistroEsqueciMinhaSenha');
-Core\Router::add('/senha/redefinir',Controllers\Login\SenhaController::class,'telaRedefinirSenha');
-Core\Router::add('/senha/alterar',Controllers\Login\SenhaController::class,'actionRedefinirSenha');
+Core\Router::add('/senha/redefinir/{hash1}/{hash2}',Controllers\Login\SenhaController::class,'telaRedefinirSenha');
+Core\Router::add('/senha/alterar/{hash1}/{hash2}',Controllers\Login\SenhaController::class,'actionRedefinirSenha');
