@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="<?= $template->lang;?>">
 <head>
-  <meta charset="utf-8">
+  <meta charset="<?=APPLICATION_CHARSET?>">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><?=$template->title?></title>
 

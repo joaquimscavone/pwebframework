@@ -9,10 +9,10 @@ interface Mail{
     /**
      * Adiciona um destinatário ao e-mail;
      * @param string $email // email do destinatário
-     * @param string $nome // nome do destinatário opcional;
+     * @param string $name // nome do destinatário opcional;
      * @return self
      */
-    public function addAddress(string $email, string $nome = '');
+    public function addAddress(string $email, string $name = '');
 
     /**
      * Cria um título para o e-mail
@@ -23,7 +23,7 @@ interface Mail{
     /**
      * Atribui um texto a mensagem
      * @param string $text
-     * @return void
+     * @return self
      */
     public function setMessage(string $text);
     /**
@@ -50,6 +50,13 @@ interface Mail{
      * @return bool
      */
     public function send();
+
+    /**
+     * alterar a codificação padrão do e-mail;
+     * @param string $chaset ex; UFT-8;
+     * @return self
+     */
+    public function setCharSet(string $charset);
 
 
 }
