@@ -88,4 +88,19 @@ class RecuperarSenhas extends Model
     public function getUser(){
         return $this->usuario;
     }
+
+    /**
+     * pega a um objeto recuperarsenha com base nas hashs do meu sistema
+     * @param mixed $hash1
+     * @param mixed $hash2
+     * @return false|self   
+     */
+    public static function checkHashs($hash1,$hash2){
+        $recuperar = new RecuperarSenhas();
+        $recuperar->addWhere('hash1','=',$hash1);
+        $recuperar->addWhere('hash2','=',$hash2);
+        $recuperar->addWhere('utilizacao_data_hora', 'is', 'null');
+        $recuperar->addWhere('expiracao_data_hora', '>', new Date);
+        return $recuperar->get();
+    }
 }

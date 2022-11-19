@@ -5,13 +5,14 @@ namespace Controllers\Login;
 
 use Components\AlertComponent;
 use Core\Action;
+use Core\Controller;
 use Core\Mail;
 use Core\Request;
 use Core\View;
 use Core\ViewElement;
 use Models\RecuperarSenhas;
 
-class SenhaController
+class SenhaController extends Controller
 {
 
     /**
@@ -88,17 +89,24 @@ class SenhaController
      * Chama a tela para redefinir a senha
      * @return void
      */
-    public function telaRedefinirSenha()
+    public function telaRedefinirSenha($hash1,$hash2)
     {
+        $recupera = RecuperarSenhas::checkHashs($hash1, $hash2);
+        if($recupera === false){
+            $this->error404();
+        }
+
         $view = new View('login/senha-recuperacao', 'blank');
         $view->setTitle('Recuperar Senha');
+        $view->hash1 = $hash1;
+        $view->hash2 = $hash2;
         $view->show();
     }
     /**
      * Altera a senha do usuário para a informada;
      * @return void
      */
-    public function actionRedefinirSenha()
+    public function actionRedefinirSenha($hash1,$hash2,Request $request)
     {
         die('senha alterada');
     }

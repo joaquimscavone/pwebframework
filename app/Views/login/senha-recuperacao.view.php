@@ -6,7 +6,11 @@
     <div class="card-body">
     <?php \Components\AlertComponent::flushMessage();?>
       <p class="login-box-msg">Você está a apenas um passo de sua nova senha, recupere sua senha agora.</p>
-      <form action="<?=$view->getUrl(\Controllers\Login\SenhaController::class,'actionRedefinirSenha')?>" method="post">
+      <form action="<?=$view->getUrl(
+                        \Controllers\Login\SenhaController::class,
+                        'actionRedefinirSenha',
+                        ['hash1'=>$view->hash1,'hash2'=>$view->hash2]
+                        )?>" method="post">
         <div class="input-group mb-3">
           <input type="password" class="form-control" placeholder="Senha" name="senha" required>
           <div class="input-group-append">
