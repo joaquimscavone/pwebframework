@@ -108,6 +108,20 @@ class SenhaController extends Controller
      */
     public function actionRedefinirSenha($hash1,$hash2,Request $request)
     {
-        die('senha alterada');
+        $recupera = RecuperarSenhas::checkHashs($hash1, $hash2);
+        if($recupera === false){
+            $this->error404();
+        }
+        if ($request->isEmpty('senha') || $request->senha != $request->confirmar) {
+            $msg = 'A Senha e a Confirmação são campos obrigatórios e devem ser iguais';
+            AlertComponent::addFlashMessage('Erro de preechimento.', $msg, AlertComponent::ALERT_WARNING);
+            $this->redirect(self::class, 'telaRedefinirSenha', ['hash1' => $hash1, 'hash2' => $hash2,]);
+        }
+
+        $recupera->storagePassword($request->senha);
+        AlertComponent::addFlashMessage('Sucesso!', 'Senha redefinida.', AlertComponent::ALERT_SUCCESS);
+        $this->redirect(LoginController::class);
+        
+
     }
 }

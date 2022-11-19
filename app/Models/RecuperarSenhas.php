@@ -48,7 +48,7 @@ class RecuperarSenhas extends Model
     public function create($email)
     {
         // verificar se o e-mail existe;
-        $usuario = Usuairos::getUserByEmail($email);
+        $usuario = Usuarios::getUserByEmail($email);
         if($usuario){
             $recuperar = $this->getRegisterFromUser($usuario->cod_usuario);
             if($recuperar){
@@ -102,5 +102,14 @@ class RecuperarSenhas extends Model
         $recuperar->addWhere('utilizacao_data_hora', 'is', 'null');
         $recuperar->addWhere('expiracao_data_hora', '>', new Date);
         return $recuperar->get();
+    }
+
+    public function storagePassword($password){
+        $usuario = new Usuarios($this->cod_usuario);
+        $usuario->senha = $password;
+        $usuario->save();
+        $this->utilizacao_data_hora = new Date;
+        parent::save();
+        return true;
     }
 }

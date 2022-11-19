@@ -6,7 +6,7 @@ use \Components\AlertComponent;
 use \Core\Action;
 use \Core\Request;
 use \Core\View;
-use \Models\Usuairos;
+use \Models\Usuarios;
 class LoginController{
     public function index(){
         $view = new View('login/login','blank');
@@ -48,7 +48,7 @@ class LoginController{
 
 
         //validar integridade da dabse de dados;
-        $usuario = new Usuairos();
+        $usuario = new Usuarios();
         $usuario->nome = $request->nome;
         $usuario->email = $request->email;
         $usuario->senha = $request->senha;

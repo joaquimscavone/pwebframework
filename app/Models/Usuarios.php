@@ -4,7 +4,7 @@ namespace Models;
 use Core\Model;
 use Exception;
 
-class Usuairos extends Model
+class Usuarios extends Model
 {
     protected $table = 'usuarios';
     protected $pk = 'cod_usuario';
@@ -28,7 +28,7 @@ class Usuairos extends Model
     }
 
     public static function  getUserByEmail($email){
-        $user = new Usuairos;
+        $user = new Usuarios;
         $user->addWhere('email', '=', $email);
         return $user->get();
     }
