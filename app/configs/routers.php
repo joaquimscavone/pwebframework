@@ -1,6 +1,9 @@
 <?php
 
 Core\Router::add('',Controllers\HomeController::class,'index');
+Core\Router::add('/notfound',Controllers\ErroPagesController::class,'page404');
+Core\Router::add('/error',Controllers\ErroPagesController::class,'page500');
+
 Core\Router::add('/login',Controllers\Login\LoginController::class,'index');
 Core\Router::add('/cadastro',Controllers\Login\LoginController::class,'cadastro');
 Core\Router::add('/login/logar',Controllers\Login\LoginController::class,'logar');

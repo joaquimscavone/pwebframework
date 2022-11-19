@@ -59,7 +59,14 @@ class SenhaController
         Action::getActionByController(LoginController::class)->redirect();
     }
 
-    private function getViewRecuperarSenha($usuario, $hash1, $hash2)
+    /**
+     * Summary of getViewRecuperarSenha
+     * @param string $usuario nome do usuário
+     * @param string $hash1
+     * @param string $hash2
+     * @return View
+     */
+    private function getViewRecuperarSenha(string $usuario, string $hash1, string $hash2)
     {
         $view = new View('emails/redefinir-senha', 'email');
         $view->setTitle("Redefinir Senha $usuario");

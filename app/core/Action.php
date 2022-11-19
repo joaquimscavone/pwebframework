@@ -2,6 +2,7 @@
 
 namespace Core;
 
+use Controllers\ErroPagesController;
 
 class Action
 {
@@ -39,7 +40,7 @@ class Action
             , $paramaters);
             return;
         }
-        die("Rota não cadastrada!"); //mudar para página 404;
+        Action::getActionByController(ErroPagesController::class, 'page404')->redirect();
     }
 
     public function getUrl(){
@@ -49,5 +50,9 @@ class Action
     public function redirect(){
         header('location:' . $this->getUrl());
         die();
+    }
+
+    public function rederLink($label){
+        echo "<a href='{$this->getUrl()}'>$label</a>";
     }
 }
