@@ -47,12 +47,13 @@ class Usuarios extends Model implements UserAuthenticate
         $usuario->addWhere('senha', '=', new Password($password));
         $usuario = $usuario->get();
         if($usuario){
-            $session->createSessionUser($user);
+            $session->createSessionUser($usuario);
             return $usuario;
         }
         return false;
     }
-    public function logout(): UserAuthenticate|false{
-        return new Usuarios();
+    public function logout(): bool{
+        $session = Session::getSession();
+        return $session->clearSessionUser();
     }
 }

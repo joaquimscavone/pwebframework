@@ -42,7 +42,7 @@ class Session{
     }
 
     public function createSessionUser(UserAuthenticate $user){
-        if($this->isLogged){
+        if($this->isLogged()){
             return false;
         }
         $_SESSION[self::$session_user] = $user;
@@ -51,6 +51,18 @@ class Session{
 
     public function isLogged(){
         return array_key_exists(self::$session_user, $_SESSION);
+    }
+
+    public function clearSessionUser():bool{
+        if($this->isLogged()){
+           unset($_SESSION[self::$session_user]);
+            return true;
+        }
+        return false;
+       
+    }
+    public function getUser(){
+        return (array_key_exists(self::$session_user, $_SESSION))?$_SESSION[self::$session_user]:false;
     }
 
     public static function getSession(){

@@ -5,11 +5,12 @@ namespace Controllers\Login;
 use \Components\AlertComponent;
 use Controllers\HomeController;
 use \Core\Action;
+use Core\Controller;
 use \Core\Request;
 use Core\Session;
 use \Core\View;
 use \Models\Usuarios;
-class LoginController{
+class LoginController extends Controller{
     public function index(){
         $view = new View('login/login','blank');
         $view->setTitle('Login');
@@ -50,8 +51,21 @@ class LoginController{
         );
         $request->getLastAction()->redirect();
         
+    }
 
-       
+    public function logout(Request $request){
+        $user = Session::getSession()->getUser();
+        if($user){
+            if($user->logout()){
+                $this->redirect(self::class);
+            }
+        }
+        AlertComponent::addFlashMessage(
+            'Erro de sistema',
+            'Falha de logout!', AlertComponent::ALERT_DANGER
+        );
+        $request->getLastAction()->redirect();
+
     }
 
 
