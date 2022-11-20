@@ -6,7 +6,8 @@ class Request{
 
     private static $request;
     private static $excluded = [];
-
+    private $current_page;
+    private $last_page;
     private function __construct()
     {
         $session = Session::getSession();
@@ -19,8 +20,10 @@ class Request{
         }else{
             unset($session->request_key);
         }
-        $session->last_page = $session->current_page;
-        $session->current_page = $this->url;
+        $this->last_page = $session->current_page;
+        $this->current_page = $this->url;
+        $session->last_page = $this->last_page;
+        $session->current_page = $this->current_page;
     }
 
     public static function getRequest(){
@@ -57,6 +60,9 @@ class Request{
     }
 
     public function getLastAction(){
-        return Action::getActionByUrl(Session::getSession()->last_page);
+        return Action::getActionByUrl($this->last_page);
+    }
+    public function getAction(){
+        return Action::getActionByUrl($this->current_page);
     }
 }

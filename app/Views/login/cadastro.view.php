@@ -44,7 +44,7 @@
             <div class="icheck-primary">
               <input type="checkbox" id="agreeTerms" name="termo" value="agree" required>
               <label for="agreeTerms">
-                Eu aceito os <a href="<?= $view->getUrl(\Controllers\TermosController::class) ?>" target="_blank">termos do serviço terms</a>
+                Eu aceito os <a href="<?= $view->getUrl(\Controllers\TermosController::class) ?>" target="_blank">termos do serviço</a>
               </label>
             </div>
           </div>

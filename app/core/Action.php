@@ -40,7 +40,10 @@ class Action
             , $paramaters);
             return;
         }
-        Action::getActionByController(ErroPagesController::class, 'page404')->redirect();
+        if(defined('PAGE_404')){
+            header('location:' . PAGE_404);
+        }
+        die('ERRO 404 - PAGE NOT FOUND!');
     }
 
     public function getUrl(){
