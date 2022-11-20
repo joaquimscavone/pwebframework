@@ -1,6 +1,6 @@
 <?php
 
-Core\Router::add('',Controllers\HomeController::class,'index');
+Core\Router::add('',Controllers\HomeController::class,'index')->addMiddleware(['auth']);
 Core\Router::add('/notfound',Controllers\ErroPagesController::class,'page404');
 Core\Router::add('/error',Controllers\ErroPagesController::class,'page500');
 

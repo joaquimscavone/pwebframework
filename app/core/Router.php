@@ -17,6 +17,8 @@ class Router
 
     private $parameters;
 
+    private $middlewares = [];
+
     private function __construct($url, $controller, $method)
     {
         $this->url = $url;
@@ -62,6 +64,7 @@ class Router
         }
 
         self::$routers[$url] = new Router($url, $controller, $method);
+        return self::$routers[$url];
     }
 
     /**
@@ -127,6 +130,27 @@ class Router
             ///produto/([a-zA-Z0-9_\-|\s]{1,})/([a-zA-Z0-9_\-|\s]{1,})
         }
         return false;
+    }
+
+          /**
+           * Summary of addMiddleware
+           * @param string|array $middleware apelido do middle ou a classe ou marray com vários deles
+           * @return void
+           */
+    
+    public function addMiddleware($middleware){
+        $conf_middlewares = Configs::getConfig('middlewares');
+        if(is_string($middleware)){
+            $middleware = [$middleware];
+        }
+        foreach($middleware as $mid){
+            if(array_key_exists($mid,$conf_middlewares)){
+                $this->middlewares[] = $conf_middlewares[$mid];
+            }else{
+                $this->middlewares[] = $mid;
+            }
+        }
+        return $this;
     }
 }
 
