@@ -6,6 +6,7 @@ use Core\Configs;
 use Core\Date;
 use Core\Hash;
 use Core\Model;
+use Core\Password;
 use DateTime;
 
 class RecuperarSenhas extends Model

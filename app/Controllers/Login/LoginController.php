@@ -33,6 +33,19 @@ class LoginController{
             );
             $request->getLastAction()->redirect();
        }
+
+        $usuario = Usuarios::login($request->email, $request->senha);
+        if($usuario){
+            //logar no sistema;
+            die('logou!');
+        }
+        AlertComponent::addFlashMessage(
+            'Credenciais inválidas',
+            'O e-mail e/ou senha não conferem', AlertComponent::ALERT_WARNING
+        );
+        $request->getLastAction()->redirect();
+        
+
        
     }
 

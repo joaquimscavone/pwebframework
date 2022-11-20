@@ -4,6 +4,7 @@ namespace Models;
 
 use Core\Interfaces\UserAuthenticate;
 use Core\Model;
+use Core\Password;
 use Exception;
 
 class Usuarios extends Model implements UserAuthenticate
@@ -17,7 +18,7 @@ class Usuarios extends Model implements UserAuthenticate
     public function save($data = []){
         $data = array_merge($this->data, $data);
         if(isset($data['senha'])){
-            $data['senha'] = md5($data['senha']);
+            $data['senha'] = new Password($data['senha']);
         }
         if(isset($data['email'])){
             $id = ($this->isStorage()) ? $data[$this->pk] : null;
@@ -36,7 +37,10 @@ class Usuarios extends Model implements UserAuthenticate
     }
 
     public static function login(string $user, string $password):UserAuthenticate|false{
-        return new Usuarios();
+        $usuario = new Usuarios;
+        $usuario->addWhere('email', '=', $user);
+        $usuario->addWhere('senha', '=', new Password($password));
+        return $usuario->get();
     }
     public function logout(): UserAuthenticate|false{
         return new Usuarios();
