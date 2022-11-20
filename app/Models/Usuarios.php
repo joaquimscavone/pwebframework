@@ -1,10 +1,12 @@
 <?php
 
 namespace Models;
+
+use Core\Interfaces\UserAuthenticate;
 use Core\Model;
 use Exception;
 
-class Usuarios extends Model
+class Usuarios extends Model implements UserAuthenticate
 {
     protected $table = 'usuarios';
     protected $pk = 'cod_usuario';
@@ -31,5 +33,12 @@ class Usuarios extends Model
         $user = new Usuarios;
         $user->addWhere('email', '=', $email);
         return $user->get();
+    }
+
+    public static function login(string $user, string $password):UserAuthenticate|false{
+        return new Usuarios();
+    }
+    public function logout(): UserAuthenticate|false{
+        return new Usuarios();
     }
 }

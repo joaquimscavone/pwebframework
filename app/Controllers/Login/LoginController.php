@@ -20,9 +20,23 @@ class LoginController{
         $view->setTitle('Cadastre-se');
         $view->show();
     }
-    public function logar(){
-        
+
+    /**
+     * recebe a requisição de login
+     * @return void
+     */
+    public function logar(Request $request){
+       if($request->isEmpty('senha') || $request->isEmpty('email')){
+            AlertComponent::addFlashMessage(
+                'Requisição incompleta',
+                'O e-mail e senha são campos obrigatórios', AlertComponent::ALERT_WARNING
+            );
+            $request->getLastAction()->redirect();
+       }
+       
     }
+
+
     public function cadastrar(Request $request)
     {
         //validar os dados recebidos
