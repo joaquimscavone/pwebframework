@@ -3,8 +3,10 @@
 namespace Controllers\Login;
 
 use \Components\AlertComponent;
+use Controllers\HomeController;
 use \Core\Action;
 use \Core\Request;
+use Core\Session;
 use \Core\View;
 use \Models\Usuarios;
 class LoginController{
@@ -36,8 +38,11 @@ class LoginController{
 
         $usuario = Usuarios::login($request->email, $request->senha);
         if($usuario){
-            //logar no sistema;
-            die('logou!');
+            AlertComponent::addFlashMessage(
+                'Bem vindo!',
+                "Olá {$usuario->nome} tenha um ótimo dia!", AlertComponent::ALERT_INFO
+            );
+            Action::getActionByController(HomeController::class)->redirect();
         }
         AlertComponent::addFlashMessage(
             'Credenciais inválidas',

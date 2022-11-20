@@ -23,6 +23,7 @@ defined('APPLICATION_ENV')          || define('APPLICATION_ENV', 'development');
 defined('APPLICATION_URL')          || define('APPLICATION_URL', 'http://framework.localhost');
 defined('APPLICATION_LANG')         || define('APPLICATION_LANG', 'pt-br');
 defined('APPLICATION_NAME')         || define('APPLICATION_NAME', 'Framework');
+defined('APPLICATION_SESSION_NAME') || define('APPLICATION_SESSION_NAME', 'Framework');
 defined('APPLICATION_CHARSET')      || define('APPLICATION_CHARSET', 'utf-8');
 defined('PAGE_404')                 || define('PAGE_404', APPLICATION_URL.'/notfound');
 defined('TIME_ZONE')                || define('TIME_ZONE', 'America/Araguaina');

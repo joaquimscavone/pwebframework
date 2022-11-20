@@ -230,4 +230,16 @@ abstract class Model{
         return $this->get() !== false;
     }
 
+    public function __serialize(): array
+    {
+        return array_merge($this->data, ['___exists___' => $this->___exists___]);
+    }
+
+    public function __unserialize(array $data): void
+    {
+        $this->exists = $data['___exists___'];
+        unset($data['___exists___']);
+        $this->data = $data;
+    }
+
 }

@@ -2,20 +2,22 @@
 
 namespace Core;
 
+use Core\Interfaces\UserAuthenticate;
 
 class Session{
     private static $instance;
 
     private $session;
+    private static $session_user = APPLICATION_SESSION_NAME . '_USER';
 
     private function __construct()
     {
-        session_name(APPLICATION_NAME);
+        session_name(APPLICATION_SESSION_NAME);
         session_start();
-        if(!array_key_exists(APPLICATION_NAME,$_SESSION)){
-            $_SESSION[APPLICATION_NAME] = array();
+        if(!array_key_exists(APPLICATION_SESSION_NAME,$_SESSION)){
+            $_SESSION[APPLICATION_SESSION_NAME] = array();
         }
-        $this->session = & $_SESSION[APPLICATION_NAME];
+        $this->session = & $_SESSION[APPLICATION_SESSION_NAME];
     }
 
     public function __set($name, $value){
@@ -37,6 +39,18 @@ class Session{
         if(array_key_exists($name,$this->session)){
             unset($this->session[$name]);
         }
+    }
+
+    public function createSessionUser(UserAuthenticate $user){
+        if($this->isLogged){
+            return false;
+        }
+        $_SESSION[self::$session_user] = $user;
+    }
+
+
+    public function isLogged(){
+        return array_key_exists(self::$session_user, $_SESSION);
     }
 
     public static function getSession(){

@@ -5,6 +5,7 @@ namespace Models;
 use Core\Interfaces\UserAuthenticate;
 use Core\Model;
 use Core\Password;
+use Core\Session;
 use Exception;
 
 class Usuarios extends Model implements UserAuthenticate
@@ -37,10 +38,19 @@ class Usuarios extends Model implements UserAuthenticate
     }
 
     public static function login(string $user, string $password):UserAuthenticate|false{
+        $session = Session::getSession();
+        if($session->isLogged()){
+            return false;
+        }
         $usuario = new Usuarios;
         $usuario->addWhere('email', '=', $user);
         $usuario->addWhere('senha', '=', new Password($password));
-        return $usuario->get();
+        $usuario = $usuario->get();
+        if($usuario){
+            $session->createSessionUser($user);
+            return $usuario;
+        }
+        return false;
     }
     public function logout(): UserAuthenticate|false{
         return new Usuarios();
