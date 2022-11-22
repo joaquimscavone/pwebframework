@@ -135,7 +135,7 @@ class Router
           /**
            * Summary of addMiddleware
            * @param string|array $middleware apelido do middle ou a classe ou marray com vários deles
-           * @return void
+           * @return Router
            */
     
     public function addMiddleware($middleware){
@@ -151,6 +151,25 @@ class Router
             }
         }
         return $this;
+    }
+
+    public function MiddlewaresExec(){
+        foreach($this->middlewares as $middleware){
+            $obj = new $middleware();
+            if(!$obj->check()){
+                $obj->handle();
+            }
+        }
+    }
+
+    public function MiddlewaresCheck(){
+        foreach($this->middlewares as $middleware){
+            $obj = new $middleware();
+            if(!$obj->check()){
+               return false;
+            }
+        }
+        return true;
     }
 }
 

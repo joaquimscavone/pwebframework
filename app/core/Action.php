@@ -29,6 +29,7 @@ class Action
     public function run()
     {
         if ($this->router) {
+            $this->router->MiddlewaresExec();
             $controller = new ($this->router->getController());
             $paramaters = array_values($this->router->getParameters());
             $paramaters[] = Request::getRequest();
