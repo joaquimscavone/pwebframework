@@ -32,6 +32,7 @@ class View extends ViewElement{
 
    
     public function setTitle($title){
+        $this->title = $title;
         $fix = $this->template->title_prefix;
         if(!empty($fix)){
             $title = $fix . $title;
