@@ -16,7 +16,7 @@
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
-    <?php (new \Core\Components('MainHeader'))->show()?>
+    <?php (new \Core\Components('MainHeader'))->show(['user'=>$user])?>
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
@@ -28,7 +28,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col">
-            <h1><?=$view->title?></h1>
+            <h1><?=$template->sample_title?></h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->

@@ -49,6 +49,9 @@ class ViewElement{
 
     public function show(array $data = []){
         extract(array_merge_recursive($this->__data, $data));
+        $url = function ($controller, $method = METHOD_DEFAULT, $paramns = []) {
+            return $this->getUrl($controller, $method, $paramns);
+        };
         require $this;
     }
 

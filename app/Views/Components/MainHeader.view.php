@@ -6,11 +6,9 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="../../index3.html" class="nav-link">Home</a>
+        <a href="<?=$url(\Controllers\HomeController::class)?>" class="nav-link"><i class="fas fa-tachometer-alt mr-1"></i>Dashboard</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
+    
     </ul>
 
     <!-- Right navbar links -->
@@ -95,6 +93,7 @@
           <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
         </div>
       </li>
+   
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -122,40 +121,27 @@
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
       </li>
+     
+     
       <li class="nav-item dropdown user-menu">
         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-          <img src="<?=APPLICATION_URL?>/assets/images/user2-160x160.jpg" class="user-image img-circle elevation-2" alt="User Image">
-          <span class="d-none d-md-inline">Alexander Pierce</span>
+          <i class="fas fa-user-circle text-dark"></i>
+          <span class="d-none d-md-inline"><?=$user->nome?></span>
         </a>
         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <!-- User image -->
-          <li class="user-header bg-primary">
-            <img src="<?=APPLICATION_URL?>/assets/images/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <li class="user-header bg-dark">
+          <i class="fas fa-user-circle text-light fa-5x"></i>
 
             <p>
-              Alexander Pierce - Web Developer
-              <small>Member since Nov. 2012</small>
+              <?=$user->nome?>
             </p>
           </li>
           <!-- Menu Body -->
-          <li class="user-body">
-            <div class="row">
-              <div class="col-4 text-center">
-                <a href="#">Followers</a>
-              </div>
-              <div class="col-4 text-center">
-                <a href="#">Sales</a>
-              </div>
-              <div class="col-4 text-center">
-                <a href="#">Friends</a>
-              </div>
-            </div>
-            <!-- /.row -->
-          </li>
           <!-- Menu Footer-->
           <li class="user-footer">
-            <a href="#" class="btn btn-default btn-flat">Profile</a>
-            <a href="#" class="btn btn-default btn-flat float-right">Sign out</a>
+            <a href="#" class="btn btn-default btn-flat"><i class="fas fa-id-card mr-1"></i></i>Perfil</a>
+            <a href="<?=$url(\Controllers\Login\LoginController::class,'logout')?>" class="btn btn-default btn-flat float-right"><i class="fas fa-sign-out-alt mr-1"></i>Sair</a>
           </li>
         </ul>
       </li>

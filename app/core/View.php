@@ -2,6 +2,7 @@
 
 
 namespace Core;
+use stdClass;
 
 class View extends ViewElement{
 
@@ -32,7 +33,7 @@ class View extends ViewElement{
 
    
     public function setTitle($title){
-        $this->title = $title;
+        $this->template->sample_title = $title;
         $fix = $this->template->title_prefix;
         if(!empty($fix)){
             $title = $fix . $title;
@@ -44,9 +45,19 @@ class View extends ViewElement{
         $this->template->title = $title;
     }
 
+    private function getUser(){
+        $session = Session::getSession();
+        if($session->isLogged()){
+            return $session->getUser();
+        }
+
+        return new stdClass;
+    }
+
 
     public function show(array $data = []){
         $template = $this->template;
+        $user = $this->getUser();
         $view = new ViewElement((string) $this);
         $view->mergeData($this->getData());
         $view->mergeData($data);
