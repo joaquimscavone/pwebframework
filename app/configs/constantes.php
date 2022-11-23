@@ -27,3 +27,5 @@ defined('APPLICATION_SESSION_NAME') || define('APPLICATION_SESSION_NAME', 'Frame
 defined('APPLICATION_CHARSET')      || define('APPLICATION_CHARSET', 'utf-8');
 defined('PAGE_404')                 || define('PAGE_404', APPLICATION_URL.'/notfound');
 defined('TIME_ZONE')                || define('TIME_ZONE', 'America/Araguaina');
+defined('APPLICATION_VERSION')      || define('APPLICATION_VERSION', '1.0.0');
+defined('APPLICATION_RELEASE_YEAR') || define('APPLICATION_RELEASE_YEAR', '2021');
