@@ -84,4 +84,15 @@ class Tag implements ViewElement{
     public function isVoid(){
       return $this->void;
     }
+
+    public static function create($tag,$class="",$content=""){
+        $tag = new Tag($tag);
+        if(!empty($class)){
+            $tag->class = $class;
+        }
+        if(!empty($content)){
+            $tag->add($content);
+        }
+        return $tag;
+    }
 }
