@@ -14,6 +14,6 @@ class Testes{
         $h1->class = 'danger';
         $d->add(new Tag('hr'));
         $d->style = "background-color:red;";
-        $d->show();
+        $h1->parentNode()->show();
     }
 }

@@ -13,10 +13,18 @@ class Tag implements ViewElement{
     private $children = array();
     private $properties = array();
     private $void;
+    private $parent;
+
+    private $linebreak = '';
+    private $tab = '';
     public function __construct($tagname)
     {
         $this->tagname = $tagname;
         $this->void = in_array($this->tagname,self::VOID_ELEMENTS);
+        if(APPLICATION_ENV == 'development'){
+            $this->linebreak = "\n";
+            $this->tab = "\t";
+        }
     }
 
 
@@ -25,7 +33,15 @@ class Tag implements ViewElement{
             throw new \Exception('Elementos Void não podem ter filhos!');
         }
         $this->children[] = $element;
+        if($element instanceof Tag){
+            $element->parent = $this;
+            $element->tab .= $this->tab;
+        }
         return $this;
+    }
+
+    public function parentNode(){
+        return $this->parent;
     }
 
     public function __set($name, $value){
@@ -48,19 +64,21 @@ class Tag implements ViewElement{
 
     
     public function show(){
+        $lb_tab = $this->linebreak . $this->tab;
+        $lb_internal_tab = (empty($lb_tab)) ? "" : $lb_tab . "\t";
         if($this->void){
-            echo "<{$this->tagname}{$this->renderProperties()}/>";
+            echo "{$lb_tab}<{$this->tagname}{$this->renderProperties()}/>";
             return;
         }
-        echo "<{$this->tagname}{$this->renderProperties()}>";
+        echo "{$lb_tab}<{$this->tagname}{$this->renderProperties()}>";
         foreach($this->children as $child){
             if($child instanceof ViewElement){
                 $child->show();
                 continue;
             }
-            echo $child;
+            echo $lb_internal_tab.$child;
         }
-        echo "</{$this->tagname}>";
+        echo "{$lb_tab}</{$this->tagname}>";
     }
 
     public function isVoid(){
