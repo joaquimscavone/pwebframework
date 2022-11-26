@@ -3,7 +3,9 @@
 
 namespace Core;
 
-class ViewElement{
+use Core\Interfaces\ViewElement as InterfacesViewElement;
+
+class ViewElement implements InterfacesViewElement{
 
     private $view;
    

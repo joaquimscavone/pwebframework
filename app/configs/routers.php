@@ -19,3 +19,7 @@ Core\Router::add('/esqueici-minha-senha',Controllers\Login\SenhaController::clas
 Core\Router::add('/senha/registrar',Controllers\Login\SenhaController::class,'criarRegistroEsqueciMinhaSenha')->addMiddleware('noAuth');
 Core\Router::add('/senha/redefinir/{hash1}/{hash2}',Controllers\Login\SenhaController::class,'telaRedefinirSenha')->addMiddleware('noAuth');
 Core\Router::add('/senha/alterar/{hash1}/{hash2}',Controllers\Login\SenhaController::class,'actionRedefinirSenha')->addMiddleware('noAuth');
+
+
+
+Core\Router::add('/testes',Controllers\Testes::class,'index');

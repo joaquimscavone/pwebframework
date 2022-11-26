@@ -22,7 +22,4 @@ class Date extends DateTime{
         return parent::modify("$seconds second");
     }
 
-    public function getFormat($format){
-        return $this->formrt($format);
-    }
 }
