@@ -2,8 +2,10 @@
 
 namespace Controllers;
 
+use Components\AlertComponent;
 use Core\Controller;
 use Core\Request;
+use Core\Session;
 use Core\View;
 
 class PerfilController extends Controller{
@@ -24,7 +26,31 @@ class PerfilController extends Controller{
      * @param Request $request
      * @return void
      */
-    public function edit($cod_usuarios,Request $request){
+    public function edit(Request $request){
+        if($request->isEmpty('nome') || $request->isEmpty('email')){
+            AlertComponent::addFlashMessage(
+                'Dados incompletos',
+                'O nome e o e-mail são dados obrigatórios', AlertComponent::ALERT_WARNING
+            );
+            $request->getLastAction()->redirect();
+        }
+        $usuario = Session::getSession()->getUser();
+        $usuario->nome = $request->nome;
+        $usuario->email = $request->email;
+        try{
+            $usuario->save();
+        }catch(\Exception $e){
+            AlertComponent::addFlashMessage(
+                'Erro de alteração!',
+                $e->getMessage(), AlertComponent::ALERT_DANGER
+            );
+            $request->getLastAction()->redirect();
+        }
+        AlertComponent::addFlashMessage(
+            'Alteração realizada!',
+            "Dados Atualizados com sucesso.", AlertComponent::ALERT_SUCCESS
+        );
+        $request->getLastAction()->redirect();
         
     }
     /**

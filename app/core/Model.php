@@ -34,9 +34,6 @@ abstract class Model{
     ];
     public function __construct($id = null)
     {
-        //$this->connection_name = 'administrativo';
-        $parameters = $this->loadParameters();
-        $this->driver = new $parameters['class']($parameters);
         if($id){
             $this->load($id);
         }
@@ -60,6 +57,10 @@ abstract class Model{
 
     }
     protected function getDriver():DataBaseDriver{
+        if(is_null($this->driver)){
+            $parameters = $this->loadParameters();
+            $this->driver = new $parameters['class']($parameters);
+        }
         return $this->driver;
     }
 
@@ -79,7 +80,7 @@ abstract class Model{
 
     //inserir
     private function insert($data){
-        $id = $this->driver->insert($this->table, $data);
+        $id = $this->getDriver()->insert($this->table, $data);
         $pk = $this->pk;
         $this->$pk = $id;
         $this->storage();
@@ -237,7 +238,7 @@ abstract class Model{
 
     public function __unserialize(array $data): void
     {
-        $this->exists = $data['___exists___'];
+        $this->___exists___ = $data['___exists___'];
         unset($data['___exists___']);
         $this->data = $data;
     }

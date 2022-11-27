@@ -38,7 +38,10 @@
 
       <!-- Main content -->
       <section class="content">
-        <?php require $view; ?>
+        <?php
+        \Components\AlertComponent::flushMessage();
+        require $view; 
+        ?>
       </section>
       <!-- /.content -->
     </div>

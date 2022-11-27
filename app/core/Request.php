@@ -14,7 +14,7 @@ class Request{
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $request = md5(implode('', $_REQUEST));
             if($request === $session->request_key){
-               // $this->getLastAction()->redirect();
+               $this->getLastAction()->redirect();
             }
             $session->request_key = $request;
         }else{

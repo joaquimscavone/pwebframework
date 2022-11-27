@@ -9,7 +9,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form>
+                <form action="<?= $view->getUrl(\Controllers\PerfilController::class,'edit');?>" method="post">
                     <div class="card-body">
                         <div class="form-group">
                             <label for="perfil-nome">Nome</label>
@@ -49,7 +49,7 @@
                             <input type="password" class="form-control" id="perfil-senha-nova" placeholder="Digite sua nova senha" name="novasenha" requided>
                         </div>
                         <div class="form-group">
-                            <label for="perfil-senha-confirmacao">Digite a confirmação da sua senha</label>
+                            <label for="perfil-senha-confirmacao">Confimarção de Senha</label>
                             <input type="password" class="form-control" id="perfil-senha-confirmacao" placeholder="Repita sua senha" name="confirmacao" requided>
                         </div>
                        
