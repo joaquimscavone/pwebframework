@@ -22,7 +22,6 @@ Core\Router::add('/senha/alterar/{hash1}/{hash2}',Controllers\Login\SenhaControl
 
 
 
-Core\Router::add('/testes',Controllers\Testes::class,'index');
 
 
 
@@ -39,3 +38,10 @@ Core\Router::add('/meu-cadastro', Controllers\PerfilController::class, 'index');
 Core\Router::add('/meu-cadastro/edit', Controllers\PerfilController::class, 'edit');
 Core\Router::add('/meu-cadastro/remove', Controllers\PerfilController::class, 'remove');
 Core\Router::add('/meu-cadastro/edit_password', Controllers\PerfilController::class, 'editPassword');
+
+
+//administração
+
+
+Core\Router::add('/testes',Controllers\AdministracaoController::class,'testes');
+Core\Router::add('/phpinfo',Controllers\AdministracaoController::class,'phpinfo');

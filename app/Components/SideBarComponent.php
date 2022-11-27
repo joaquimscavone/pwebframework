@@ -28,6 +28,17 @@ class SideBarComponent extends Components
   public function show(array $data = [])
   {
     $menu = $this->createMenuTags($this->menu);
+    if($this->active){
+      $this->active->class .= " active";
+      $parent = $this->active->parentNode()->parentNode();
+      while(!is_null($parent)){
+        if($parent->getTagName()=='li'){
+          $parent->class .= " menu-open";
+          $parent->getChild(0)->class .= " active";
+        }
+        $parent = $parent->parentNode();
+      }
+    }
     foreach ($menu as $item) {
       $item->show();
     }

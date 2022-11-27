@@ -54,6 +54,10 @@ class Tag implements ViewElement
     {
         return $this->parent;
     }
+
+    public function getTagName(){
+        return $this->tagname;
+    }
     public function getChild($nchild)
     {
         return (isset($this->children[$nchild]))?$this->children[$nchild]:null;
