@@ -5,7 +5,7 @@
   <meta charset="<?= APPLICATION_CHARSET ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><?= $template->title ?></title>
-
+  <link rel="shortcut icon" href="<?=$template->icon?>" type="image/png">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -22,7 +22,7 @@
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-    <?php (new \Core\Components('side-bar'))->show() ?>
+    <?php (new \Core\Components('side-bar'))->show(['template'=>$template]) ?>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->

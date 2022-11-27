@@ -13,7 +13,7 @@ class PerfilController extends Controller{
      * @return void
      */
     public function index(){
-        $view = new View('blank');
+        $view = new View('perfil');
         $view->setTitle('Meu Cadastro');
         $view->show();
     }

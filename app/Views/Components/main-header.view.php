@@ -140,7 +140,7 @@
           <!-- Menu Body -->
           <!-- Menu Footer-->
           <li class="user-footer">
-            <a href="#" class="btn btn-default btn-flat"><i class="fas fa-id-card mr-1"></i></i>Perfil</a>
+            <a href="<?=$url(\Controllers\PerfilController::class)?>" class="btn btn-default btn-flat"><i class="fas fa-id-card mr-1"></i></i>Perfil</a>
             <a href="<?=$url(\Controllers\Login\LoginController::class,'logout')?>" class="btn btn-default btn-flat float-right"><i class="fas fa-sign-out-alt mr-1"></i>Sair</a>
           </li>
         </ul>
