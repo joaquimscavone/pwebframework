@@ -56,4 +56,18 @@ class Usuarios extends Model implements UserAuthenticate
         $session = Session::getSession();
         return $session->clearSessionUser();
     }
+
+    public function editPassword($password,$newpassword){
+        $user = new Usuarios();
+        $user->where('cod_usuario', '=', $this->cod_usuario);
+        $user->where('senha', '=', new Password($password));
+        $user = $user->get();
+        if($user){
+            $user->senha = $newpassword;
+            $user->save();
+            return true;
+        }
+        throw new \Exception('Senha atual está incorreta!');
+
+    }
 }

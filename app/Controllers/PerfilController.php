@@ -68,7 +68,37 @@ class PerfilController extends Controller{
      * @param Request $request
      * @return void
      */
-    public function editPassword($cod_usuario,Request $request){
+    public function editPassword(Request $request){
+        if($request->isEmpty('senha') || $request->isEmpty('novasenha')){
+            AlertComponent::addFlashMessage(
+                'Dados incompletos',
+                'Informe a senha atual e a nova senha para alterar a senha', AlertComponent::ALERT_WARNING
+            );
+            $request->getLastAction()->redirect();
+        }
+        if($request->novasenha !== $request->confirmacao){
+            AlertComponent::addFlashMessage(
+                'Dados incorretos',
+                'A senha e a confirmação não são iguais', AlertComponent::ALERT_WARNING
+            );
+            $request->getLastAction()->redirect();
+        }
+
+        $usuario = Session::getSession()->getUser();
+        try{
+            $usuario->editPassword($request->senha,$request->novasenha);
+        }catch(\Exception $e){
+            AlertComponent::addFlashMessage(
+                'Erro de alteração!',
+                $e->getMessage(), AlertComponent::ALERT_DANGER
+            );
+            $request->getLastAction()->redirect();
+        }
+        AlertComponent::addFlashMessage(
+            'Alteração realizada!',
+            "senha atualizada com sucesso!.", AlertComponent::ALERT_SUCCESS
+        );
+        $request->getLastAction()->redirect();
 
     }
 }

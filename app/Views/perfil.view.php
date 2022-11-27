@@ -38,19 +38,19 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form>
+                <form action=<?= $view->getUrl(\Controllers\PerfilController::class, 'editPassword');?> method='post'>
                     <div class="card-body">
                         <div class="form-group">
                             <label for="perfil-senha-atual">Senha Atual</label>
-                            <input type="password" class="form-control" id="perfil-senha-atual" placeholder="Digite sua senha atual" name="senha" requided>
+                            <input type="password" class="form-control" id="perfil-senha-atual" placeholder="Digite sua senha atual" name="senha" required>
                         </div>
                         <div class="form-group">
                             <label for="perfil-senha-nova">Nova Senha</label>
-                            <input type="password" class="form-control" id="perfil-senha-nova" placeholder="Digite sua nova senha" name="novasenha" requided>
+                            <input type="password" class="form-control" id="perfil-senha-nova" placeholder="Digite sua nova senha" name="novasenha" required>
                         </div>
                         <div class="form-group">
                             <label for="perfil-senha-confirmacao">Confimarção de Senha</label>
-                            <input type="password" class="form-control" id="perfil-senha-confirmacao" placeholder="Repita sua senha" name="confirmacao" requided>
+                            <input type="password" class="form-control" id="perfil-senha-confirmacao" placeholder="Repita sua senha" name="confirmacao" required>
                         </div>
                        
                     </div>
