@@ -23,3 +23,19 @@ Core\Router::add('/senha/alterar/{hash1}/{hash2}',Controllers\Login\SenhaControl
 
 
 Core\Router::add('/testes',Controllers\Testes::class,'index');
+
+
+
+//Rotas de usuários
+
+Core\Router::add('/usuarios', Controllers\UsersController::class, 'index');
+Core\Router::add('/usuarios/{cod_usuario}', Controllers\UsersController::class, 'user');
+Core\Router::add('/usuarios/{cod_usuario}/edit', Controllers\UsersController::class, 'edit');
+Core\Router::add('/usuarios/{cod_usuario}/remove', Controllers\UsersController::class, 'remove');
+Core\Router::add('/usuarios/{cod_usuario}/edit_password', Controllers\UsersController::class, 'editPassword');
+
+// Rotas de perfil
+Core\Router::add('/meu-cadastro', Controllers\PerfilController::class, 'index');
+Core\Router::add('/meu-cadastro/edit', Controllers\PerfilController::class, 'edit');
+Core\Router::add('/meu-cadastro/remove', Controllers\PerfilController::class, 'remove');
+Core\Router::add('/meu-cadastro/edit_password', Controllers\PerfilController::class, 'editPassword');
