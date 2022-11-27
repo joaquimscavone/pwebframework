@@ -54,6 +54,10 @@ class Tag implements ViewElement
     {
         return $this->parent;
     }
+    public function getChild($nchild)
+    {
+        return (isset($this->children[$nchild]))?$this->children[$nchild]:null;
+    }
 
     public function __set($name, $value)
     {

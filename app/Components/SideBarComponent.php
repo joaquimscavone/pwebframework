@@ -11,6 +11,7 @@ class SideBarComponent extends Components
 {
   private static $instance;
   private $menu;
+  private $active;
   private function __construct()
   {
     $this->menu = Configs::getConfig('menu');
@@ -59,6 +60,9 @@ class SideBarComponent extends Components
         return false;
       }
       $a->href = $action->getUrl();
+      if($action->isRunning()){
+        $this->active = $a;
+      }
     }elseif($action!="#"){
       $a->href = $action;
       $a->target = '_blank';
@@ -68,22 +72,27 @@ class SideBarComponent extends Components
 
   private function createItem($label, $icon, $action, $submenus = [])
   {
+    $p = Tag::create('p','',$label);
     $li = Tag::create('li',"nav-item");
     if(count($submenus)>0){
       $a  = Tag::create('a',"nav-link");
       $a->href = "#";
+      $submenus = $this->createMenuTags($submenus);
+      if(count($submenus)==0){
+        return false;
+      }
+      $p->add(Tag::create('i',"right fas fa-angle-left"));
+      $ul = Tag::create('ul', "nav nav-treeview", $submenus);
+      $li->add([$a,$ul]);
     }else{
       $a = $this->createLink($action);
       if($a===false){
         return false;
       }
-      
+      $li->add($a);
     }
-   
     $i = Tag::create('i',"$icon nav-icon");
-    $p = Tag::create('p','',$label);
     $a->add([$i, $p]);
-    $li->add($a);
     return $li;
   }
 

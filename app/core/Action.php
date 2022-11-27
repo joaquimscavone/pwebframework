@@ -63,4 +63,10 @@ class Action
     public function middlewaresCheck(){
         return $this->router->MiddlewaresCheck();
     }
+
+    public function isRunning(){
+        $action_running = Request::getRequest()->getAction();
+        return $action_running->router->getController() == $this->router->getController()
+            && $action_running->router->getMethod() == $this->router->getMethod();
+    }
 }
