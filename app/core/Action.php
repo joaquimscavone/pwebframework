@@ -59,4 +59,8 @@ class Action
     public function rederLink($label){
         echo "<a href='{$this->getUrl()}'>$label</a>";
     }
+
+    public function middlewaresCheck(){
+        return $this->router->MiddlewaresCheck();
+    }
 }
