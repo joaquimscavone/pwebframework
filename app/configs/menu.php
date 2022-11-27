@@ -12,7 +12,7 @@ return [
     [
         'type' => 'item', //item|header
         'label' => 'Administração',
-        'icon' => 'fas fa-tachometer-alt',
+        'icon' => 'fas fa-cogs',
         'submenu' => [
             [
                 'type' => 'item', //item|header
@@ -23,13 +23,13 @@ return [
             [
                 'type' => 'item', //item|header
                 'label' => 'PHP Info',
-                'icon' => 'fas fa-users-cog',
+                'icon' => 'fab fa-php',
                 'action' => Action::getActionByController(\Controllers\AdministracaoController::class,'phpinfo'),
             ],
             [
                 'type' => 'item', //item|header
                 'label' => 'Testes',
-                'icon' => 'fas fa-users-cog',
+                'icon' => 'fas fa-bug',
                 'action' => Action::getActionByController(\Controllers\AdministracaoController::class,'testes'),
             ],
             [

@@ -13,7 +13,7 @@ class Usuarios extends Model implements UserAuthenticate
     protected $table = 'usuarios';
     protected $pk = 'cod_usuario';
 
-    protected $columns = ['cod_usuario', 'nome', 'email', 'senha', 'email_verificado', 'criacao_data'];
+    protected $columns = ['cod_usuario', 'nome', 'email', 'senha','admin', 'email_verificado', 'criacao_data'];
     
     
     public function save($data = []){

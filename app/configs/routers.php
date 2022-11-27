@@ -27,11 +27,11 @@ Core\Router::add('/senha/alterar/{hash1}/{hash2}',Controllers\Login\SenhaControl
 
 //Rotas de usuários
 
-Core\Router::add('/usuarios', Controllers\UsersController::class, 'index');
-Core\Router::add('/usuarios/{cod_usuario}', Controllers\UsersController::class, 'user');
-Core\Router::add('/usuarios/{cod_usuario}/edit', Controllers\UsersController::class, 'edit');
-Core\Router::add('/usuarios/{cod_usuario}/remove', Controllers\UsersController::class, 'remove');
-Core\Router::add('/usuarios/{cod_usuario}/edit_password', Controllers\UsersController::class, 'editPassword');
+Core\Router::add('/usuarios', Controllers\UsersController::class, 'index')->addMiddleware(['auth','isAdmin']);
+Core\Router::add('/usuarios/{cod_usuario}', Controllers\UsersController::class, 'user')->addMiddleware(['auth','isAdmin']);
+Core\Router::add('/usuarios/{cod_usuario}/edit', Controllers\UsersController::class, 'edit')->addMiddleware(['auth','isAdmin']);
+Core\Router::add('/usuarios/{cod_usuario}/remove', Controllers\UsersController::class, 'remove')->addMiddleware(['auth','isAdmin']);
+Core\Router::add('/usuarios/{cod_usuario}/edit_password', Controllers\UsersController::class, 'editPassword')->addMiddleware(['auth','isAdmin']);
 
 // Rotas de perfil
 Core\Router::add('/meu-cadastro', Controllers\PerfilController::class, 'index');
@@ -43,5 +43,5 @@ Core\Router::add('/meu-cadastro/edit_password', Controllers\PerfilController::cl
 //administração
 
 
-Core\Router::add('/testes',Controllers\AdministracaoController::class,'testes');
-Core\Router::add('/phpinfo',Controllers\AdministracaoController::class,'phpinfo');
+Core\Router::add('/testes',Controllers\AdministracaoController::class,'testes')->addMiddleware(['auth','isAdmin']);
+Core\Router::add('/phpinfo',Controllers\AdministracaoController::class,'phpinfo')->addMiddleware(['auth','isAdmin']);
