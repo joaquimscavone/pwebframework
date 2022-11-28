@@ -81,7 +81,15 @@ class UsersController extends Controller{
      * @return void
      */
     public function remove($cod_usuario,Request $request){
-
+        $usuario = new Usuarios($cod_usuario);
+        if($cod_usuario == $request->cod_usuario && $cod_usuario == $usuario->cod_usuario){
+            AlertComponent::addFlashMessage(
+                'Sucesso!',
+                "Registro de {$usuario->nome} foi excluido com sucesso!", AlertComponent::ALERT_SUCCESS
+            );
+            $this->redirect(self::class);
+        }
+        $this->error404();
     }
     /**
      * Altera a senha de um usuário;
