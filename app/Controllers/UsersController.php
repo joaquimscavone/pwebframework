@@ -5,6 +5,7 @@ namespace Controllers;
 use Core\Controller;
 use Core\Request;
 use Core\View;
+use Models\Usuarios;
 
 class UsersController extends Controller{
 
@@ -13,8 +14,10 @@ class UsersController extends Controller{
      * @return void
      */
     public function index(){
-        $view = new View('blank');
+        $view = new View('administracao/users');
         $view->setTitle('Usuários');
+        $usuarios = new Usuarios();
+        $view->usuarios = $usuarios->all();
         $view->show();
     }
     /**
