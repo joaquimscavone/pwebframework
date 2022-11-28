@@ -14,6 +14,8 @@ class Usuarios extends Model implements UserAuthenticate
     protected $pk = 'cod_usuario';
 
     protected $columns = ['cod_usuario', 'nome', 'email', 'senha','admin', 'email_verificado', 'criacao_data'];
+
+    protected $columns_excluded = ['senha'];
     
     
     public function save($data = []){

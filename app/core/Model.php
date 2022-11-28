@@ -20,6 +20,8 @@ abstract class Model{
 
     protected $columns = [];
 
+    protected $columns_excluded = [];
+
     protected $data = [];
 
     protected $___exists___ = false;
@@ -115,7 +117,7 @@ abstract class Model{
     private function load($id){
         $this->where($this->pk, '=', $id);
         $stm = $this->getDriver()->select($this->table, 
-                                         $this->columns, 
+                                         $this->getColumns(), 
                                          $this->flushWhere());
         $result = $stm->fetch(\PDO::FETCH_ASSOC);
         if($result){
@@ -128,7 +130,7 @@ abstract class Model{
     //todos os registros da base dados
     public function all(){
         $stm = $this->getDriver()->select($this->table, 
-                                         $this->columns, 
+                                         $this->getColumns(), 
                                          $this->flushWhere(), 
                                          $this->flushOrder(), 
                                          $this->flushLimit());
@@ -140,7 +142,7 @@ abstract class Model{
     }
     public function get(){
         $stm = $this->getDriver()->select($this->table, 
-                                         $this->columns, 
+                                         $this->getColumns(), 
                                          $this->flushWhere(), 
                                          $this->flushOrder());
         $result = $stm->fetchObject($this::class);
@@ -241,6 +243,10 @@ abstract class Model{
         $this->___exists___ = $data['___exists___'];
         unset($data['___exists___']);
         $this->data = $data;
+    }
+
+    public function getColumns(){
+        return array_diff($this->columns, $this->columns_excluded);
     }
 
 }

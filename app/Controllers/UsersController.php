@@ -2,9 +2,11 @@
 
 namespace Controllers;
 
+use Components\AlertComponent;
 use Core\Controller;
 use Core\Request;
 use Core\View;
+use Exception;
 use Models\Usuarios;
 
 class UsersController extends Controller{
@@ -42,8 +44,35 @@ class UsersController extends Controller{
      * @param Request $request
      * @return void
      */
-    public function edit($cod_usuarios,Request $request){
-        
+    public function edit($cod_usuario,Request $request){
+        $usuario = new Usuarios($cod_usuario);
+        if(is_null($usuario->cod_usuario)){
+            $this->error404();
+        }
+        if($request->isEmpty('nome') || $request->isEmpty('email')){
+            AlertComponent::addFlashMessage(
+                'Dados incompletos',
+                'O nome e o e-mail são dados obrigatórios', AlertComponent::ALERT_WARNING
+            );
+            $request->getLastAction()->redirect();
+        }
+        $usuario->nome = $request->nome;
+        $usuario->email = $request->email;
+        $usuario->admin = ($request->isEmpty('admin')) ? 0 : 1;
+        try{
+            $usuario->save();
+        }catch(Exception $e){
+            AlertComponent::addFlashMessage(
+                'Erro!',
+                $e->getMessage(), AlertComponent::ALERT_DANGER
+            );
+            $request->getLastAction()->redirect();
+        }
+        AlertComponent::addFlashMessage(
+            'Sucesso!',
+            'Seus dados foram atualizados', AlertComponent::ALERT_SUCCESS
+        );
+        $request->getLastAction()->redirect();
     }
     /**
      * Remove um usuário do sistema;
