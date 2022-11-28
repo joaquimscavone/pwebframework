@@ -28,7 +28,7 @@
                         </div>
                         <div class="card-footer">
                             <div class="text-right">
-                                <a href="<?=$view->getUrl(\Controllers\UsersController::class,'edit',['cod_usuario'=>$usuario->cod_usuario])?>" class="btn btn-sm btn-primary">
+                                <a href="<?=$view->getUrl(\Controllers\UsersController::class,'user',['cod_usuario'=>$usuario->cod_usuario])?>" class="btn btn-sm btn-primary">
                                     <i class="fas fa-edit"></i> Editar
                                 </a>
                             </div>

@@ -26,6 +26,14 @@ class UsersController extends Controller{
      * @return void
      */
     public function user($cod_usuario){
+        $usuario = new Usuarios($cod_usuario);
+        if(is_null($usuario->cod_usuario)){
+            $this->error404();
+        }
+        $view = new View('administracao/user-edit');
+        $view->setTitle('Editar Usuário');
+        $view->usuario = $usuario;
+        $view->show();
 
     }
     /**
