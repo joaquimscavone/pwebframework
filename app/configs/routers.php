@@ -43,5 +43,6 @@ Core\Router::add('/meu-cadastro/edit_password', Controllers\PerfilController::cl
 //administração
 
 
-Core\Router::add('/testes',Controllers\AdministracaoController::class,'testes')->addMiddleware(['auth','isAdmin']);
-Core\Router::add('/phpinfo',Controllers\AdministracaoController::class,'phpinfo')->addMiddleware(['auth','isAdmin']);
+Core\Router::add('/admin/testes',Controllers\AdministracaoController::class,'testes')->addMiddleware(['auth','isAdmin']);
+Core\Router::add('/admin/phpinfo',Controllers\AdministracaoController::class,'phpinfo')->addMiddleware(['auth','isAdmin']);
+Core\Router::add('/admin/icons',Controllers\AdministracaoController::class,'icons')->addMiddleware(['auth','isAdmin']);

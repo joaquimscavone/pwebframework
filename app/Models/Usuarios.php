@@ -13,7 +13,7 @@ class Usuarios extends Model implements UserAuthenticate
     protected $table = 'usuarios';
     protected $pk = 'cod_usuario';
 
-    protected $columns = ['cod_usuario', 'nome', 'email', 'senha','admin', 'email_verificado', 'criacao_data'];
+    protected $columns = ['cod_usuario', 'nome', 'email', 'senha','admin','excluido', 'email_verificado', 'criacao_data'];
 
     protected $columns_excluded = ['senha'];
     
@@ -71,5 +71,24 @@ class Usuarios extends Model implements UserAuthenticate
         }
         throw new \Exception('Senha atual está incorreta!');
 
+    }
+
+    public function get(){
+        $this->where('excluido', '=', '0');
+        return parent::get();
+    }
+    public function all(){
+        $this->where('excluido', '=', '0');
+        return parent::all();
+    }
+    public function load($id){
+        $this->where('excluido', '=', '0');
+        return parent::load($id);
+    }
+
+    public function delete(){
+        parent::save(['excluido' => 1]);
+        $this->storage(false);
+        return $this;
     }
 }

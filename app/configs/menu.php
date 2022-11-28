@@ -36,7 +36,7 @@ return [
                 'type' => 'item', //item|header
                 'label' => 'Ícones',
                 'icon' => 'fas fa-users-cog',
-                'action' => 'https://fontawesome.com/v5/search?o=r&m=free',
+                'action' => Action::getActionByController(\Controllers\AdministracaoController::class,'icons'),
             ],
 
         ],

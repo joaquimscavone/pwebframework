@@ -14,4 +14,9 @@ class AdministracaoController extends Controller{
         $view->setTitle('Testes');
         $view->show();
     }
+    public function icons(){
+        $view = new View('administracao/icones');
+        $view->setTitle('Ícones do sistema');
+        $view->show();
+    }
 }

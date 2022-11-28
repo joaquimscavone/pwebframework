@@ -114,7 +114,7 @@ abstract class Model{
         return $this->insert($data);
 
     }
-    private function load($id){
+    protected function load($id){
         $this->where($this->pk, '=', $id);
         $stm = $this->getDriver()->select($this->table, 
                                          $this->getColumns(), 

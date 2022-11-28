@@ -83,6 +83,7 @@ class UsersController extends Controller{
     public function remove($cod_usuario,Request $request){
         $usuario = new Usuarios($cod_usuario);
         if($cod_usuario == $request->cod_usuario && $cod_usuario == $usuario->cod_usuario){
+            $usuario->delete();
             AlertComponent::addFlashMessage(
                 'Sucesso!',
                 "Registro de {$usuario->nome} foi excluido com sucesso!", AlertComponent::ALERT_SUCCESS
