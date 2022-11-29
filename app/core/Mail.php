@@ -13,7 +13,7 @@ class Mail implements InterfacesMail
 
 
     private $host, $username, $password, $port_smtp, $port_imap, $signature, $address = [];
-    private $subject, $body_type, $body, $charset, $phpmailler;
+    private $subject, $body_type, $body, $charset, $phpmailler, $security;
 
     public function __construct()
     {
@@ -107,7 +107,7 @@ class Mail implements InterfacesMail
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
         $mail->Username   = $this->username;                     //SMTP username
         $mail->Password   = $this->password;                               //SMTP password
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+        $mail->SMTPSecure = ($this->security)?$this->security:PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
         $mail->Port       = $this->port_smtp;                                    //TCP port to connect to; use 587 if you have 
         $mail->CharSet = $this->charset;
         $this->phpmailler = $mail;
