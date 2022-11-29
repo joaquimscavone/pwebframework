@@ -1,4 +1,4 @@
--- Active: 1667224428444@@127.0.0.1@3306@framework
+-- Active: 1667224428444@@127.0.0.1@3306@phpmyadmin
 DROP DATABASE framework;
 
 CREATE DATABASE framework

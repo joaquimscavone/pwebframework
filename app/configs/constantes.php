@@ -19,13 +19,14 @@ defined('LIBS_PATH')                || define('LIBS_PATH', APPLICATION_PATH . '/
 defined('TEMPLATE_DEFAULT')         || define('TEMPLATE_DEFAULT', 'main.template.php');
 defined('METHOD_DEFAULT')           || define('METHOD_DEFAULT', 'index');
 defined('CONNECTION_NAME_DEFAULT')  || define('CONNECTION_NAME_DEFAULT', 'default');
-defined('APPLICATION_ENV')          || define('APPLICATION_ENV', 'development'); //production utilizado pelo usuário final e development em fase de desenvolvimento
+defined('APPLICATION_ENV')          || define('APPLICATION_ENV', 'production'); //production utilizado pelo usuário final e development em fase de desenvolvimento
 defined('APPLICATION_URL')          || define('APPLICATION_URL', 'http://framework.localhost');
 defined('APPLICATION_LANG')         || define('APPLICATION_LANG', 'pt-br');
 defined('APPLICATION_NAME')         || define('APPLICATION_NAME', 'Framework');
 defined('APPLICATION_SESSION_NAME') || define('APPLICATION_SESSION_NAME', 'Framework');
 defined('APPLICATION_CHARSET')      || define('APPLICATION_CHARSET', 'utf-8');
 defined('PAGE_404')                 || define('PAGE_404', APPLICATION_URL.'/notfound');
+defined('PAGE_500')                 || define('PAGE_500', APPLICATION_URL.'/error');
 defined('TIME_ZONE')                || define('TIME_ZONE', 'America/Araguaina');
 defined('APPLICATION_VERSION')      || define('APPLICATION_VERSION', '1.0.0');
 defined('APPLICATION_RELEASE_YEAR') || define('APPLICATION_RELEASE_YEAR', '2021');
